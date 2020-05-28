@@ -164,13 +164,91 @@ También hemos empleado las siguientes plataformas:
 
 #### Descripción de la Práctica ####
 
+El objetivo principal de esta práctica es aprender a utilizar el módulo sensor de ultrasonido. El sensor de ultrasonido es el responsable de medir distancias para evitar obstáculos.
+
+En lugar de utilizar el sensor de ultrasonido de forma independiente, se han asociado dos led, uno de color rojo y otro de color verde; y un zumbador de sonido (más adelante buzzer). Cuando el sensor detecte movimiento, se encenderá el led rojo y el buzzer emitira sonido. En caso de no detectar movimiento, permanecerá encendido el led de color verde.
+
 #### Material Utilizado ####
+
+- 1 Arduino UNO.
+- 1 Protoboard.
+- 1 Módulo de Sensor Ultrasonico HC-SR04.
+- 1 LED Rojo.
+- 1 LED Verde.
+- 1 Buzzer.
+- 2 Resistencias 220 Ω.
+- 9 Cables de Hembra a Macho DuPont.
 
 #### Descripción del Componente ####
 
+El módulo HC-SR04 es un sensor de distancias por ultrasonidos capaz de detectar objetos y calcular la distancia a la que se encuentra en un rango de 2 a 450 cm. El sensor funciona por ultrasonidos y contiene toda la electrónica encargada de hacer la medición. Su uso es tan sencillo como enviar el pulso de arranque y medir la anchura del pulso de retorno.
+
+El sensor incorpora un par de transductores de ultrasonido que se utilizan de manera conjunta para determinar la distancia del sensor con un objeto colocado enfrente de este. La interfaz digital se logra mediante 2 pines digitales: el pin de trigger (disparo) y echo (eco).
+
+1.	El primero recibe un pulso de habilitación de parte del microcontrolador, mediante el cual se le indica al módulo que comience a realizar la medición de distancia.
+2.	El segundo Pin (echo) del sensor “muestra” al microcontrolador un pulso cuyo ancho es proporcional al tiempo que tarda el sonido en viajar del transductor al obstáculo y luego de vuelta al módulo.
+
 #### Simulación ####
+
+En este apartado podemos ver la simulación de la práctica en el programa Tinkercad.
+
+En la **imagen 1**, se aprecia que el ultrasonido está encendido y el led está en verde porque no detecta ningún obstáculo en una distancia mayor a 200 cm.
+
+En la **imagen 2**, se aprecia que el ultrasonido y led rojo están encendidos porque se detecta un obstáculo en una distancia igual o inferior a 200 cm. En este caso, el buzzer emite sonido para que se identifique la presencia de un obstáculo.
+
+##### Imagen 1 #####
+
+##### Imagen 2 #####
 
 #### Código Fuente ####
 
+Después de efectuar el cableado, se abre el programa “IDE de Arduino” y escribimos este código para que la placa Arduino R1 reconozca las diferentes partes de la práctica, e interactúen como se ha descrito anteriormente. Una vez escrito el código lo subimos a la placa y comprobamos que funciona. 
 
+```cpp
+int ledPinRojo = 10;
+int ledPinVerde = 12;
+int pinBuz = 6; 
+int ultrasonido = 9;
+
+void setup()
+{
+    Serial.begin(9600);
+    pinMode(ledPinRojo, OUTPUT);
+    pinMode(ledPinVerde, OUTPUT);
+}
+
+long readUltrasonicDistance(int pin)
+{
+    pinMode(pin, OUTPUT);
+    digitalWrite(pin,LOW);
+    delayMicroseconds(2);
+    digitalWrite(pin,HIGH);
+    delayMicroseconds(10);
+    digitalWrite(pin, LOW);
+    pinMode(pin, INPUT);
+    return pulseIn(pin, HIGH);
+}
+
+void loop()
+{
+    // Leemos la Distancia del Sensor Ultrasónico.
+    int cm = 0.01723*readUltrasonicDistance(ultrasonido);
+  
+    // Si la Distancia es menor a 2 metros, encendemos el Led Rojo y apagamos el Verde.
+    // Además, hacemos sonar el Buzzer.
+    if (cm < 200)
+    {
+        tone(pinBuz, 350, 200);
+        digitalWrite(ledPinRojo, HIGH);
+        Serial.println("Motion detected!");
+        digitalWrite(ledPinVerde, LOW);
+    }
+    else
+    {
+        // En caso contrario, apagamos el Led Rojo y encendemos el Verde.
+        digitalWrite(ledPinRojo, LOW);
+        digitalWrite(ledPinVerde, HIGH);
+    }
+}
+```
 ### Práctica 2: Sensor PIR ###
