@@ -90,3 +90,69 @@ Nos hemos basado principalmente en tutoriales de YouTube e Instructables y a par
 
 Después de escoger este proyecto y avanzar bastante en la codificación, hemos encontrado en YouTube circuitos muy parecidos al que deseábamos realizar, como por ejemplo,[ el que se presenta aquí.](https://www.youtube.com/watch?v=dRCnccv_dVE)
 
+Como se puede apreciar en la imagen anterior la diferencia más notoria es que en ese proyecto se incorporan cámaras en lugar de utilizar Sensores PIR y de Ultrasonidos. A pesar de ello, la idea general de cómo disponer los elementos en el circuito eléctrico para el proyecto final la hemos sacado de ese video. 
+
+## Descripción del Proyecto ##
+
+Este proyecto tiene como objetivo elaborar una alarma doméstica junto con un sistema de detección de intrusos que permita avisar al usuario de la intromisión de agentes externos en su domicilio. 
+
+La realización de dicho proyecto se ha llevado a cabo por un equipo compuesto de 4 integrantes y se ha dividido en 5 prácticas:
+
+- **Práctica 1:** Módulo Sensor Ultrasónico.
+- **Práctica 2:** Módulo Sensor PIR.
+- **Práctica 3:** Montaje de Ambos Sensores.
+- **Práctica 4:** Teclado Matricial y Pantalla LCD.
+- **Práctica 5:** Conexión de 2 Arduinos UNO.
+
+El desarrollo de las prácticas y su unificación conforman el proyecto final, cumpliendo con el objetivo que se perseguía y permitiendo que los miembros del equipo trabajen de forma autónoma en cada parte. 
+
+El funcionamiento de la alarma doméstica permitirá realizar configuraciones en el dispositivo para poder ejecutar varias acciones como: 
+
+1. Activar Alarma Completa.
+2. Activar ½ Alarma.
+3. Cambiar de Contraseña.
+
+Más adelante se explicará a detalle en qué consisten cada una de estas funciones. 
+
+## Tecnologías y Materiales Empleados  ##
+
+A pesar de que más adelante se explicará qué tipos de materiales se han utilizado y cómo se van integrando al circuito, aquí incluimos a modo de resumen la lista de todos aquellos que hemos empleado para llevar a cabo nuestro proyecto final:
+
+- 2 Arduino UNO.
+- 2 Protoboard.
+- 3 LEDs Rojos.
+- 1 LED Verde.
+- 1 LED Amarillo.
+- 1 Buzzer.
+- 1 KeyPad 4x4.
+- 1 LCD 16x2.
+- 7 Resistencias de 220 Ω.
+- 1 Potenciómetro de 250 kΩ.
+- 1 Módulo de Sensor Ultrasonico HC-SR04.
+- 2 Sensores PIR HC-SR501.
+- Cables de Conexión.
+- Cables de Hembra a Macho DuPont.
+- Alimentación: Ordenador o PowerBank con Conexión para 2 Puertos USB.
+
+También hemos empleado las siguientes plataformas:
+
+- **Desarrollo:**
+    1. Arduino IDE.
+    2. Tinkercad Circuits.
+- **Investigación:**
+    1. Instructables.
+    2. YouTube.
+    3. StackExchange.
+    4. StackOverflow.
+    5. Hackaday.
+    6. Hackster.
+    7. Arduino Project Hub.
+- **Comunicación (Trabajo Colaborativo):**
+    1. Google Meet.
+    2. Google Docs.
+    3. Google Drive.
+    4. Discord.
+    5. Facebook Messenger.
+    6. GitHub.
+    7. Trello.
+
