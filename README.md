@@ -137,22 +137,22 @@ A pesar de que más adelante se explicará qué tipos de materiales se han utili
 También hemos empleado las siguientes plataformas:
 
 - **Desarrollo:**
-    1. Arduino IDE.
-    2. Tinkercad Circuits.
+  1. Arduino IDE.
+  2. Tinkercad Circuits.
 - **Investigación:**
-    1. Instructables.
-    2. YouTube.
-    3. StackExchange.
-    4. StackOverflow.
-    5. Hackaday.
-    6. Hackster.
-    7. Arduino Project Hub.
+  1. Instructables.
+  2. YouTube.
+  3. StackExchange.
+  4. StackOverflow.
+  5. Hackaday.
+  6. Hackster.
+  7. Arduino Project Hub.
 - **Comunicación (Trabajo Colaborativo):**
-    1. Google Meet.
-    2. Google Docs.
-    3. Google Drive.
-    4. Discord.
-    5. Facebook Messenger.
-    6. GitHub.
-    7. Trello.
+  1. Google Meet.
+  2. Google Docs.
+  3. Google Drive.
+  4. Discord.
+  5. Facebook Messenger.
+  6. GitHub.
+  7. Trello.
 
