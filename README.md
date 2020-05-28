@@ -1,3 +1,0 @@
-# KamikazeProject
-## Ka
-### Ka
