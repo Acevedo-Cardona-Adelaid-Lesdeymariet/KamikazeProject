@@ -8,6 +8,7 @@ Elaborar un Sistema Domótico enfocado en la seguridad del hogar con ayuda de mi
 - Diseñar e implementar interfaces y tecnologías para la automatización de sistemas de hardware y desarrollo del software asociado de forma efectiva.
 - Coordinar y participar en equipos multidisciplinarios para la aplicación de soluciones innovadoras que ataquen problemáticas de la vida cotidiana. 
 - Comprender qué es y cómo funciona el Internet de las Cosas en conjunto con Sensores y Actuadores. 
+
 ## Competencias Adquiridas ##
 ### Competencias Generales ###
 - Capacidad para abstraer, analizar, sintetizar, organizar y planificar un proyecto.
