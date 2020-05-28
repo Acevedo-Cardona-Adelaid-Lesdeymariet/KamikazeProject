@@ -156,3 +156,21 @@ También hemos empleado las siguientes plataformas:
   6. GitHub.
   7. Trello.
 
+## Costos ##
+
+## Montaje del Proyecto ##
+
+### Practica 1: Sensor Ultrasónico  ###
+
+#### Descripción de la Práctica ####
+
+#### Material Utilizado ####
+
+#### Descripción del Componente ####
+
+#### Simulación ####
+
+#### Código Fuente ####
+
+
+### Práctica 2: Sensor PIR ###
