@@ -1634,6 +1634,7 @@ Serial.begin (112500);
 }
 ```
 
+
 ## Viabilidad y Escalabilidad ##
 
 Los modelos de sistemas de detección de intrusos en el mercado son cada vez más abundantes, y su objetivo de abarcar varios aspectos de la domótica con el fin de hacer más fácil y segura la vida a los usuarios se encuentra en continua expansión. 
