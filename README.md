@@ -1,5 +1,3 @@
-# KamikazeProject
-
 ## Objetivos ##
 
 ### Objetivo General ###
