@@ -1738,6 +1738,8 @@ Creo que este proyecto incluye varia información de la que fue adquirida durant
 
 ## Anexos ##
 
-➜ [Video Explicativo del Proyecto](https://youtu.be/6_XahT1sUFg)
+### Video Explicativo del Proyecto ###
 
-➜ [Proyecto en Tinkercad para Simular o Modificar](https://www.tinkercad.com/things/kvNQvMjeGlg)
+[![Proyecto Final "DomesticSecurity" - Alarma Casera con Arduino](http://img.youtube.com/vi/6_XahT1sUFg/0.jpg)](https://youtu.be/6_XahT1sUFg)
+
+➜ [Enlace del Proyecto en Tinkercad para Simular o Modificar](https://www.tinkercad.com/things/kvNQvMjeGlg)
