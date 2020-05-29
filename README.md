@@ -767,3 +767,92 @@ Los pasos a seguir son los siguientes:
 11.	Finalmente, volver a conectar correctamente los pines tx y rx de cada uno de los arduinos entre ellos. 
 12.	Alimentar el circuito y ¡probar el resultado!
 
+### Proyecto Final: Sistema de Detección de Intrusos ###
+
+#### Contexto ####
+#### Material Utilizado ####
+#### Diagramas de Flujo ####
+##### Diagrama del Bucle Principal #####
+##### Diagrama de Detección con Alarma Activada #####
+##### Diagrama de Detección con Alarma Parcialmente Activada #####
+##### Diagrama de Cambio de Contraseña #####
+#### Simulación ####
+#### Código Fuente ####
+##### Arduino 1 #####
+##### Arduino 2 #####
+
+## Viabilidad y Escalabilidad ##
+
+Los modelos de sistemas de detección de intrusos en el mercado son cada vez más abundantes, y su objetivo de abarcar varios aspectos de la domótica con el fin de hacer más fácil y segura la vida a los usuarios se encuentra en continua expansión. 
+
+Por ello, la adición de nuevas funcionalidades al sistema es completamente factible. La dirección que parece tomar esta área es la de diseñar sistemas centralizados que permitan al usuario controlar y automatizar numerosas facciones del hogar, tales como: 
+
+-	Control de Persianas y Ventanas.
+-	Automatizar el Alumbrado.
+-	Automatizar la Calefacción. 
+-	Sistema Contra Incendios.
+-	Automatización de Electrodomésticos. 
+-	etc. 
+
+Por ello, podemos afirmar sin ninguna duda que la domótica, y el proyecto presente en este documento, es escalable. Es posible empezar con cuatro sensores y luego empezar a construir nuestra casa inteligente desde ahí. Las opciones para automatizar una vivienda son muy variadas. 
+
+La domótica doméstica cuenta también con un gran atractivo a su favor: el ahorro energético. La eficiencia energética es una de las grandes metas de la tecnología, y el uso optimizado de su consumo en el hogar se hace posible gracias a la domótica. Esto significa también para el usuario una reducción en el pago de su tarifa eléctrica y de gas.
+
+## Pruebas Realizadas ##
+
+Se han realizado múltiples pruebas para comprobar el funcionamiento del proyecto. Se listan a continuación: 
+
+## Posibles Extensiones ##
+
+Creemos que este proyecto tiene bastantes extensiones posibles. Algunas de las que hemos considerado son las siguientes: 
+
+1.	Sería muy interesante añadir a nuestro proyecto interruptores reed. Los reed son interruptores eléctricos activados por un campo magnético. Los colocaríamos en puertas y ventanas para activar nuestra alarma si algún intruso accediera a la casa de alguna forma. 
+
+2.	Tal y como está realizado el proyecto, si nuestros arduinos se quedaran sin alimentación, la alarma fallaría, ya que no hay ningún sistema complementario que proporcione energía. Nos gustaría añadir una batería interna que entrara en funcionamiento cuando la alimentación principal fallara por cualquier motivo. 
+
+3.	Sería interesante también contar con un sistema de protección dentro de la circuitería de la propia alarma, evitando así la manipulación no autorizada. De esta manera, si un intruso quisiese desactivarla (desenchufandola, cortando cables, etc.) la alarma se activaria inmediatamente. 
+
+4.	Adicionalmente, nos gustaría estudiar la posibilidad de que el usuario pueda desactivar la alarma de forma más sencilla, sin necesidad de introducir la clave. Para ello, habría dos opciones: 
+   
+    1. Crear una aplicación móvil que le permita activar la alarma y desactivarla de forma remota. 
+    1. Utilizar un sistema de identificación por RFID (módulo lector RFID-RC522 RF) para desactivar la alarma. 
+
+5.	Se podría añadir un apartado de configuración que permita programar la alarma para un calendario específico, de manera que ésta se conecte y desconecte en las fechas y horas indicadas por el usuario. Aplicando también un encendido y apagado de luces a determinadas horas para simular presencia durante un período en el que no estemos en casa. 
+
+6.	Implementación de una parte de domótica donde, por ejemplo, las luces de la casa se enciendan solas en la habitación en la que está el usuario si la alarma está desactivada pero le estamos detectando. Otra opción sería, por ejemplo, abrir la puerta del garaje o similares, para mejorar la experiencia del usuario. 
+
+## Trabajo Futuro ##
+
+Aparte de las extensiones que se han mencionado previamente, consideramos que el trabajo que se podría llevar a cabo para mejorar o ampliar este proyecto es muy interesante. 
+
+Por un lado, habría que buscar una forma mejor de gestionar la cantidad de sensores que utilizamos (y, por tanto, el número de habitaciones cubiertas con nuestro sistema). Si llegáramos a incluir los interruptores reed en puertas y ventanas, nos quedaríamos sin pines en el arduino, por lo que habría que introducir registros de desplazamiento para solventar el problema. 
+
+Por otro lado, a pesar de que el código está preparado para que la opción 4 de configuración manual funcione (ya que hemos probado algo similar para activar solo media alarma y el funcionamiento sería parecido), no hemos terminado de programar cómo escogería el usuario qué habitaciones y sensores quiere que estén activados. 
+
+Finalmente, nos gustaría poder incorporar una parte domótica más real, como hemos mencionado en el apartado de extensiones. Aunque inicialmente nos planteamos que fuera parte de este proyecto, al final lo hemos descartado por falta de tiempo. El motivo es que hemos considerado más importante mejorar el código que teníamos y también detallar el proceso completo que hemos seguido en este documento para que el proyecto sea completamente reutilizable por otros alumnos o docentes en un futuro. 
+
+## Conclusiones ##
+
+### Acevedo Cardona Adelaid Lesdeymariet ###
+
+Lo que nos llevó a elegir este proyecto por sobre otros es debido a la enorme inseguridad que va en aumento en nuestro país, no es nada raro que los saqueos o robos a mano armada en plena luz del día y dentro de propiedades privadas se presenten de forma constante, al no ser un incidente propio únicamente de la noche o madrugada como hace un par de años atrás, uno debe comenzar a plantearse la idea de tener en su hogar o vehículo un sistema de seguridad que esté funcionando la mayor cantidad de tiempo posible. Por supuesto que esto puede ser muy costoso y más ahora por la oferta y demanda, pues estos servicios tienen cada vez más mercado o clientes interesados en adquirir esta clase de servicios y por consiguiente el precio del producto aumenta, convirtiéndolo aún más inaccesible para la población que vive en condiciones de pobreza y precisamente en localidades con altos índices de criminalidad. Debido a ello la opcion mas economica es realizar uno por cuenta propia con lo más barato que tengamos a la mano y por ello nuestro proyecto no es muy costoso pero si muy funcional y cubre las necesidades más básicas y comunes de los usuarios.   
+
+Para poder elaborarlo fue necesario consultar diversos artículos y tutoriales, ya que lo ideal es tener conocimientos básicos sobre temas como la domótica, IoT, microprocesadores y microcontroladores, sensores y actuadores, lenguaje C++ y uso del Entorno de Desarrollo de Arduino. 
+
+Debido a la contingencia sanitaria del COVID-19 las cosas se complicaron un poco más, puesto que tanto a mis compañeros como a mi se nos dificulto encontrar una plataforma intuitiva y completa que pusiera a nuestra disposición todos los componentes necesarios para la correcta simulación de la idea que teníamos en mente, por suerte descubrimos que Tinkercad era una solución viable, excepto porque esta no tiene Arduino Mega y por esa razón tuvimos que ingeniarnosla usando dos Arduino UNO y comunicandolos por el puerto serial para poder tener toda la cantidad de pines disponibles que exigia el circuito final.  
+
+Otra traba inicialmente fue la comunicacion y organizacion de actividades via online, lo bueno fue que al final se pudo cumplir el objetivo buscado y terminamos todos con muchísimos más conocimientos que antes, no solo de la asignatura en sí, sino que también generales, pues aprendimos a utilizar tecnologías innovadoras que nos permitieron realizar actividades de forma colaborativa y productiva. 
+
+### Encarnacion Ocampo Gustavo ###
+
+Este proyecto se decidió realizar basado en la domótica, específicamente en la rama de seguridad con un sistema de alarma que consiste en la detección de intrusos dentro de una propiedad, además esta se activa o desactiva al momento de ingresar una contraseña. 
+
+La tecnología ha ido avanzando con el tiempo, hace unos cuantos años se pensaba en las computadoras como algo de "ciencia ficción", a los pocos años estas se volvieron realidad con grupos pequeños de personas haciendo sus propios circuitos y vendiendolos a empresas que necesitaban cajas registradoras o realizar cualquier tarea básica, llegando a la actualidad donde las computadoras son un producto que se produce de manera masiva y casi todo el mundo tiene uno en casa.
+
+Lo mismo pasa con la domótica, esta aun se ve como algo de ciencia ficción, pero cada vez se encuentra un poco más al alcance de nuestras manos, aunque uno debe tener el dinero para poder costearse uno de estos sistemas, pero por mientras, estudiantes pueden experimentar con ello con pequeñas prácticas o proyectos como este, donde podemos ver el alcance que tiene e ir mejorando poco a poco esta tecnología. La domótica ya existe, pero no es perfecta, y esto se pudo ver en nuestro proyecto.
+
+## Referencias ##
+
+## Video ##
+
+## Proyecto en Tinkercad para Simular ##
