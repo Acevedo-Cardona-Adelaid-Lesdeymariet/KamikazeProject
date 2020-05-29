@@ -867,10 +867,8 @@ Creo que este proyecto incluye varia información de la que fue adquirida durant
 
 ## Referencias ##
 
-## Video ##
+## Anexos ##
 
-https://youtu.be/6_XahT1sUFg
+[Video Explicativo del Proyecto](https://youtu.be/6_XahT1sUFg)
 
-## Proyecto en Tinkercad para Simular ##
-
-https://www.tinkercad.com/things/kvNQvMjeGlg
+[Proyecto en Tinkercad para Simular o Modificar](https://www.tinkercad.com/things/kvNQvMjeGlg)
