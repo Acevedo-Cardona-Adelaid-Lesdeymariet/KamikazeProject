@@ -90,6 +90,10 @@ Nos hemos basado principalmente en tutoriales de YouTube e Instructables y a par
 
 Después de escoger este proyecto y avanzar bastante en la codificación, hemos encontrado en YouTube circuitos muy parecidos al que deseábamos realizar, como por ejemplo,[ el que se presenta aquí.](https://www.youtube.com/watch?v=dRCnccv_dVE)
 
+<p align="center">
+<img src="img/i1.jpg" width="700"/>
+</p>
+
 Como se puede apreciar en la imagen anterior la diferencia más notoria es que en ese proyecto se incorporan cámaras en lugar de utilizar Sensores PIR y de Ultrasonidos. A pesar de ello, la idea general de cómo disponer los elementos en el circuito eléctrico para el proyecto final la hemos sacado de ese video. 
 
 ## Descripción del Proyecto ##
@@ -202,7 +206,15 @@ En la **imagen 2**, se aprecia que el ultrasonido y led rojo están encendidos p
 
 ##### Imagen 1 #####
 
+<p align="center">
+<img src="img/i2.png" width="550"/>
+</p>
+
 ##### Imagen 2 #####
+
+<p align="center">
+<img src="img/i3.png" width="550"/>
+</p>
 
 #### Código Fuente ####
 
@@ -301,7 +313,15 @@ En la **imagen 2**, se aprecia que el sensor PIR está encendido y el led está 
 
 ##### Imagen 1 #####
 
+<p align="center">
+<img src="img/i4.png" width="590"/>
+</p>
+
 ##### Imagen 2 #####
+
+<p align="center">
+<img src="img/i5.png" width="345"/>
+</p>
 
 #### Código Fuente ####
 
@@ -367,7 +387,15 @@ Esta práctica la hacemos con el objetivo de que luego en nuestro proyecto final
 
 En este apartado podemos ver la simulación de la práctica en el programa Tinkercad. La primera imagen muestra la simulación con todos los sensores desactivados salvo el LED verde, que indica que no se están detectando intrusos en el sistema:
 
+<p align="center">
+<img src="img/i6.png" width="600"/>
+</p>
+
 La siguiente imagen muestra la simulación cuando dos de los sensores están detectando intrusos. Como podemos ver, dos de los leds rojos están activados a modo indicativo: 
+
+<p align="center">
+<img src="img/i7.png" width="599"/>
+</p>
 
 #### Código Fuente ####
 
@@ -517,9 +545,22 @@ La pantalla LCD (Liquid Crystal Display) muestra información en una pantalla gr
 
 En este apartado podemos ver la simulación de la práctica en el programa Tinkercad. La primera imagen muestra la simulación del sistema a la espera de que el usuario introduzca una clave:
 
+<p align="center">
+<img src="img/i8.png" width="595"/>
+</p>
+
 **Estado 1:** Introducción de Clave Numérica Incorrecta
 
+<p align="center">
+<img src="img/i9.png" width="291"/>
+<img src="img/i10.png" width="289"/>
+</p>
+
 **Estado 2:** Introducción de Clave Numérica Correcta (2255)
+
+<p align="center">
+<img src="img/i11.png" width="358"/>
+</p>
 
 #### Código Fuente ####
 
@@ -689,6 +730,10 @@ Nosotros utilizamos la información de [Arduino to Arduino Serial Communication]
 
 Suponemos que nos encontramos en la situación descrita en el punto 2 de la introducción del apartado anterior, donde queremos comunicar un arduino que tiene conectado un sensor de ultrasonidos con un arduino que tiene conectado un led, con la idea de que el led se encienda si se está detectando la presencia de alguien. Para ello, las conexiones que tenemos que realizar son las siguientes:
 
+<p align="center">
+<img src="img/i12.png" width="700"/>
+</p>
+
 Es decir, tenemos que conectar en serie el pin tx del arduino 1 al pin rx del arduino 2, y el pin tx del arduino 2 al pin rx del arduino 1. 
 
 Adicionalmente, es **MUY importante** que tengan en común un **ground**, tal y como se muestra en la figura. De lo contrario, el proyecto no funcionará. 
@@ -757,7 +802,17 @@ Los pasos a seguir son los siguientes:
 1.	Conectar el primero de los arduinos al puerto USB del ordenador. 
 2.	Abrir Arduino IDE con el código del arduino correspondiente. 
 3.	Escoger en Herramientas el tipo de placa y el puerto correspondiente a Arduino:
+
+<p align="center">
+<img src="img/i13.png" width="457"/>
+</p>
+
 4.	Pinchar en el botón de subir a la placa, que está en la parte superior de la pantalla: 
+
+<p align="center">
+<img src="img/i14.png" width="50"/>
+</p>
+
 5.	Si hay algún error en el código, revisarlo y modificarlo para que el código sea correcto. 
 6.	Si no hay ningún error, ya podemos desconectar nuestro Arduino del ordenador. 
 7.	Conectar el segundo de los Arduinos. Si lo conectamos en el mismo puerto, no será necesario volver a repetir el punto 3. Esto es más fácil de hacer así que si conectamos los dos arduinos a la vez, ya que al escoger el puerto sólo se puede escoger uno, y posiblemente no estaremos seguros de cuál es cuál. 
