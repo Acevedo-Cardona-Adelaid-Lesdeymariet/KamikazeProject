@@ -603,14 +603,19 @@ char keymap[numRows][numCols]=
 byte rowPins[numRows]={7,6,A5,A4};//Filas de 0 a 3
 byte colPins[numCols]={A3,A2,A1,A0};//Columnas de 0 a 3
 
-Keypad myKeypad = Keypad(makeKeymap(keymap), rowPins, colPins, numRows, numCols);
+Keypad myKeypad = Keypad(makeKeymap(keymap), rowPins, colPins, numRows, 
+numCols);
+
 /*--------------------FIN KEYPAD-----------------------*/
+
 /*--------------------LCD------------------------------*/
+
 LiquidCrystal lcd(8,9,10,11,12,13);//Pines (rs,eb,d4, d5, d6,d7)
 
 //Resolución de la pantalla
 int screenWidth = 16;
 int screenHeight = 2;
+
 /*--------------------FIN LCD-------------------------*/
 
 char codigoSecreto[4] = {'2','2','5','5'};//Clave numerica
@@ -648,7 +653,8 @@ void loop()
  char pulsacion = myKeypad.getKey();//Leemos la pulsación
  if(pulsacion!=0)//Si hemos pulsado
  {
-   if(pulsacion != '#' && pulsacion != '*' && clave == 0)//Y no ha sido # (almohadilla) ni * (asterisco)
+   //Y no ha sido # (almohadilla) ni * (asterisco)
+   if(pulsacion != '#' && pulsacion != '*' && clave == 0)
    {
      lcd.print(pulsacion);//Escribimos la pulsación
      cursor++;//Incrementamos la posición del cursor
@@ -657,7 +663,8 @@ void loop()
      delay(200);
      noTone(buzzer);
      
-     if (pulsacion == codigoSecreto[posicion])//Si la pulsación se corresponde con la clave
+     //Si la pulsación se corresponde con la clave
+     if (pulsacion == codigoSecreto[posicion])
      {
        posicion ++;//Incrementamos la posición a comparar
      }
