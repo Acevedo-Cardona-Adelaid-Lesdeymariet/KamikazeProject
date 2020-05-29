@@ -825,12 +825,68 @@ Los pasos a seguir son los siguientes:
 ### Proyecto Final: Sistema de Detección de Intrusos ###
 
 #### Contexto ####
+
+Este conjunto de prácticas están pensadas para llevarse a cabo en la asignatura de 5to Semestre de Arquitectura de Computadoras con Serie SCD - 1003 correspondiente a la Ing. Sistemas Computacionales impartida en el Instituto Tecnológico de Tijuana.
+
+En particular, esta asignatura tiene divididos sus temas en cuatro unidades con diversas actividades que permiten conocer el uso de microcontroladores como Arduino. 
+
+Los objetivos concretos de lo que sería la unidad didáctica relativa a Arduino son los siguientes: 
+
+-	El alumno será capaz de comprender el funcionamiento básico de Arduino UNO.
+-	El alumno aprenderá a utilizar diferentes sensores para detectar información del entorno.
+-	El alumno podrá controlar los leds y un buzzer como indicadores de lo que está pasando en el circuito.
+-	El alumno comprenderá cómo las diferentes piezas interactúan entre ellas a través del código.
+-	El alumno será capaz de utilizar la pantalla de debug de Tinkercad y del programa Arduino UNO (serial monitor) para mostrar información sobre lo que está pasando en el circuito.
+
+Ahora que hemos dado a conocer el contexto por el que elaboramos este conjunto de prácticas, queda por contestar la siguiente interrogante: ¿por qué elegimos este proyecto en concreto y no otro? Existen varias razones: 
+
+1.	Auge de la Domótica y el uso de Microcontroladores.
+2.	Las aplicaciones para dispositivos conectados a internet son amplias (IoT o Internet de las Cosas). 
+3.	Una alarma es una aplicación real que llama mucho la atención de aquellos alumnos que apenas se van iniciando en el mundo de la electrónica. Cuanta más utilidad vean en el trabajo que están realizando, más fácil será conseguir motivarlos e implicarlos en el proyecto que se desea elaborar.
+4.	En la materia de Arquitectura de Computadoras se enseña a usar actuadores y sensores con arduino. Por lo tanto, un proyecto que es capaz de englobar a todos ellos parece perfecto a modo de conclusión para demostrar y poner en práctica nuestros conocimientos adquiridos durante todo el semestre. Además, este proyecto no es tan complejo, por lo que puede llevarse a cabo por grupos reducidos de alumnos sin problema alguno.
+
 #### Material Utilizado ####
+
+-	1 KeyPad 4x4.
+-	2 Arduino UNO.
+-	1 Sensor Ultrasónico HC-SR04.
+-	2 Sensores PIR HC-SR501.
+-	7 Resistencias de 220 Ω.
+-	3 LEDs Rojos.
+-	1 LED Naranja. 
+-	1 LED Verde.
+-	1 Buzzer.
+-	1 Pantalla LCD 16x2.
+-	1 Potenciómetro de 250 kΩ.
+
 #### Diagramas de Flujo ####
+
+A continuación se muestran 4 diagramas de flujo de las 4 partes principales de la práctica: el bucle principal, el diagrama de detección cuando la alarma está activada, el diagrama de detección cuando la alarma está activada parcialmente (media alarma) y el diagrama correspondiente al cambio de contraseña.
+
 ##### Diagrama del Bucle Principal #####
+
+<p align="center">
+<img src="img/i15.png" width="900"/>
+</p>
+
 ##### Diagrama de Detección con Alarma Activada #####
+
+<p align="center">
+<img src="img/i16.png" width="900"/>
+</p>
+
 ##### Diagrama de Detección con Alarma Parcialmente Activada #####
+
+<p align="center">
+<img src="img/i17.png" width="900"/>
+</p>
+
 ##### Diagrama de Cambio de Contraseña #####
+
+<p align="center">
+<img src="img/i18.png" width="900"/>
+</p>
+
 #### Simulación ####
 #### Código Fuente ####
 ##### Arduino 1 #####
