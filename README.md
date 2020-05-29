@@ -664,3 +664,106 @@ void loop()
   }
 }
 ```
+
+### Práctica 5: Conexión entre los dos Arduinos ###
+
+#### Introducción ####
+
+El motivo fundamental por el cual utilizamos dos arduinos parte de la necesidad de utilizar más pines para nuestro proyecto sin hacer cosas excesivamente complicadas. 
+
+Aunque la explicación completa de esto sea algo complicado, vamos a intentar reducirlo para que se entienda la forma de usarlo. 
+
+La idea básica es que exista un **protocolo de comunicación entre los dos arduinos** para que sean capaces de “entender el idioma del otro arduino”. ¿Qué significa esto? 
+
+1.	**Cada arduino tiene que tener su propio código fuente** (archivo .ino distinto). Por tanto, habrá que tener dos instancias de Arduino IDE abiertas y cargar en cada Arduino su código correspondiente. 
+
+>**Nota:** cada vez que se añade un nuevo Arduino en Tinkercad, aparece una nueva pestaña desplegable que te permite ver el código asociado al Arduino que acabamos de añadir. 
+
+2.	**El protocolo de comunicación implica que se va a decidir**, un “idioma” que entenderán los dos arduinos. Este idioma será como un **código** entre ellos para comunicar qué cosas están pasando en su placa. Por ejemplo, puede tener sentido que si tenemos conectado un sensor de ultrasonidos al Arduino número 1, quizás queramos comunicarle a un led que está conectado al Arduino número 2 que tiene que encenderse si se detecta presencia a menos de 1 metro. Se detalla la manera un poco más adelante. 
+
+Pasamos ahora a detallar las conexiones que habrá que realizar entre los dos arduinos para que todo lo anterior sea factible.
+
+#### Detalles de la Conexión Entre los dos Arduinos ####
+
+Nosotros utilizamos la información de [Arduino to Arduino Serial Communication](http://robotic-controls.com/learn/arduino/arduino-arduino-serial-communication) para aprender cómo comunicar nuestros arduinos entre ellos.
+
+Suponemos que nos encontramos en la situación descrita en el punto 2 de la introducción del apartado anterior, donde queremos comunicar un arduino que tiene conectado un sensor de ultrasonidos con un arduino que tiene conectado un led, con la idea de que el led se encienda si se está detectando la presencia de alguien. Para ello, las conexiones que tenemos que realizar son las siguientes:
+
+Es decir, tenemos que conectar en serie el pin tx del arduino 1 al pin rx del arduino 2, y el pin tx del arduino 2 al pin rx del arduino 1. 
+
+Adicionalmente, es **MUY importante** que tengan en común un **ground**, tal y como se muestra en la figura. De lo contrario, el proyecto no funcionará. 
+
+#### Ejemplo de Uso ####
+
+Mostramos aquí un ejemplo que ilustra cómo estamos utilizando esto en nuestro proyecto: 
+
+##### Arduino 1 (Envía Información) #####
+
+```cpp
+int rx = 0;
+int tx = 1;
+
+void setup()
+{
+  Serial.begin (112500);
+  //Inicializa pines UART
+  pinMode (rx, OUTPUT);
+  pinMode (tx, INPUT);
+}
+
+void loop()
+{
+  byte dataR = 0; //Se manda un 0 por el puerto serial
+  // al arduino receptor de información. 
+  Serial.print(dataR);
+}
+```
+
+##### Arduino 2 (Recibe Información) #####
+
+```cpp
+int rx = 0;
+int tx = 1;
+
+void setup()
+{
+  Serial.begin (112500);
+  //Inicializa pines UART
+  pinMode (rx, OUTPUT);
+  pinMode (tx, INPUT);
+}
+
+void loop()
+{
+  if(Serial.available() > 0)
+  {
+    val = Serial.read(); // Lee el siguiente byte
+    if (val == '0')
+    {
+      // Hace algo.
+    }
+  }
+}
+```
+
+#### Guía para Descargar el Código en Cada uno de los Arduinos ####
+
+Este apartado es especialmente importante, ya que nosotros tuvimos muchos problemas para conseguir cargar el código en los dos arduinos de forma correcta. 
+
+Los pasos a seguir son los siguientes: 
+
+**Paso previo MUY importante:** Desconectar los cables que unen los pines tx y rx del Arduino. Si están conectados entre sí, el programa nos dará un error y no nos permitirá cargar el código en el Arduino. Una vez desconectados, podemos continuar: 
+
+1.	Conectar el primero de los arduinos al puerto USB del ordenador. 
+2.	Abrir Arduino IDE con el código del arduino correspondiente. 
+3.	Escoger en Herramientas el tipo de placa y el puerto correspondiente a Arduino:
+4.	Pinchar en el botón de subir a la placa, que está en la parte superior de la pantalla: 
+5.	Si hay algún error en el código, revisarlo y modificarlo para que el código sea correcto. 
+6.	Si no hay ningún error, ya podemos desconectar nuestro Arduino del ordenador. 
+7.	Conectar el segundo de los Arduinos. Si lo conectamos en el mismo puerto, no será necesario volver a repetir el punto 3. Esto es más fácil de hacer así que si conectamos los dos arduinos a la vez, ya que al escoger el puerto sólo se puede escoger uno, y posiblemente no estaremos seguros de cuál es cuál. 
+8.	Abrir en Arduino IDE el código correspondiente al segundo de los arduinos. 
+9.	Volver a repetir los puntos 3 y 4 si fuera necesario. 
+10.	Repetir los puntos 5 y 6. 
+11.	Finalmente, volver a conectar correctamente los pines tx y rx de cada uno de los arduinos entre ellos. 
+12.	Alimentar el circuito y ¡probar el resultado!
+
