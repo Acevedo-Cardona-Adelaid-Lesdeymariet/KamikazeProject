@@ -265,8 +265,8 @@ void loop()
     // Leemos la Distancia del Sensor Ultrasónico.
     int cm = 0.01723*readUltrasonicDistance(ultrasonido);
   
-    // Si la Distancia es menor a 2 metros, encendemos el Led Rojo y apagamos el Verde.
-    // Además, hacemos sonar el Buzzer.
+    // Si la Distancia es menor a 2 metros, encendemos el Led Rojo y
+    // apagamos el Verde, además, hacemos sonar el Buzzer.
     if (cm < 200)
     {
         tone(pinBuz, 350, 200);
