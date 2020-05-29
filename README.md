@@ -1656,8 +1656,10 @@ La domótica doméstica cuenta también con un gran atractivo a su favor: el aho
 Se han realizado múltiples pruebas para comprobar el funcionamiento del proyecto. Se listan a continuación: 
 
 <p align="center">
-<img src="img/i22.png" width="662"/>
-<img src="img/i23.png" width="662"/>
+<img src="img/i22.png" width="600"/>
+<img src="img/i23.png" width="600"/>
+<img src="img/i24.png" width="600"/>
+<img src="img/i25.png" width="600"/>
 </p>
 
 ## Posibles Extensiones ##
