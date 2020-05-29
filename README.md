@@ -481,3 +481,186 @@ if(proximity == HIGH)
       
     }
 ```
+
+### Práctica 4: Pantalla LCD 16x2 y KeyPad 4x4 ###
+
+#### Descripción de la Práctica ####
+
+El objetivo principal de esta práctica es aprender a utilizar periféricos de entrada y salida de datos. Para ello utilizaremos un teclado matricial como dispositivo de entrada, el cual permitirá la introducción de claves numéricas, y una pantalla LCD como dispositivo de salida, donde se mostrará al usuario una serie de instrucciones y los números que el usuario haya introducido. 
+
+Al inicio, tendremos programada una clave numérica, un led rojo encendido, y se mostrará por la pantalla LCD un mensaje el cual indique al usuario que el sistema se encuentra a la espera de que introduzca una clave. Cuando el usuario introduzca una clave numérica, la cual se mostrará por la pantalla, podrán ocurrir 2 estados:
+
+1.	**Clave Numérica Incorrecta:** Se mostrará un mensaje por la pantalla LCD que indique dicho estado y un buzzer producirá un sonido distintivo para este estado. 
+2.	**Clave Numérica Correcta:** Se mostrará un mensaje por la pantalla LCD que indique dicho estado, se apagará el led rojo y se encenderá el led verde, y un buzzer producirá un sonido distintivo para este estado. 
+
+Esta práctica la hacemos con el objetivo de que luego en nuestro proyecto final seamos capaces de interactuar con el sistema de control de la alarma. 
+
+#### Material Utilizado ####
+
+-	1 Arduino UNO.
+-	1 Protoboard.
+-	1 Keypad 4x4.
+-	1 LCD 16x2.
+-	1 LED Rojo.
+-	1 LED Verde.
+-	1 Buzzer.
+-	4 Resistencias de 220 Ω.
+-	1 Potenciómetro 250 kΩ.
+
+#### Descripción del Componente ####
+
+Un teclado matricial es un dispositivo que agrupa los pulsadores en filas y columnas, formando una matriz, y permite controlarlos empleando un número de conductores inferior al que necesitaríamos al usarlos de forma individual. 
+
+La pantalla LCD (Liquid Crystal Display) muestra información en una pantalla gracias a la iluminación del fondo. Para ajustar dicha iluminación suele ser necesario el uso de un potenciómetro que permita regular la resistencia entre la placa Arduino y el LCD. La pantalla que utilizaremos en esta práctica es de 16x2, es decir, tiene 2 filas de 16 caracteres cada una. 
+
+#### Simulación ####
+
+En este apartado podemos ver la simulación de la práctica en el programa Tinkercad. La primera imagen muestra la simulación del sistema a la espera de que el usuario introduzca una clave:
+
+**Estado 1:** Introducción de Clave Numérica Incorrecta
+
+**Estado 2:** Introducción de Clave Numérica Correcta (2255)
+
+#### Código Fuente ####
+
+```cpp
+//Librerías necesarias
+#include <LiquidCrystal.h>
+#include <Keypad.h>
+/*---------------------KEYPAD---------------------------*/
+const byte numRows=4;//Número de filas
+const byte numCols=4;//Número de columnas
+char keypressed;
+char keymap[numRows][numCols]=
+{
+  {'1','2','3','A'},
+  {'4','5','6','B'},
+  {'7','8','9','C'},
+  {'*','0','#','D'},
+};
+
+//Conexiones entre el teclado y los terminales de arduino
+byte rowPins[numRows]={7,6,A5,A4};//Filas de 0 a 3
+byte colPins[numCols]={A3,A2,A1,A0};//Columnas de 0 a 3
+
+Keypad myKeypad = Keypad(makeKeymap(keymap), rowPins, colPins, numRows, numCols);
+/*--------------------FIN KEYPAD-----------------------*/
+/*--------------------LCD------------------------------*/
+LiquidCrystal lcd(8,9,10,11,12,13);//Pines (rs,eb,d4, d5, d6,d7)
+
+//Resolución de la pantalla
+int screenWidth = 16;
+int screenHeight = 2;
+/*--------------------FIN LCD-------------------------*/
+
+char codigoSecreto[4] = {'2','2','5','5'};//Clave numerica
+//Variables de comparación entre clave introducida y programada
+int posicion=0;
+int clave=0;
+
+int cursor=5; //Posición de introducción de datos en el LCD
+
+//Declaración de variables auxiliares
+int ledRojo=2;
+int ledVerde=3;
+int buzzer=4;
+
+void setup()
+{
+  //Inicializamos los leds y el buzzer
+  pinMode(ledRojo, OUTPUT);
+  pinMode(ledVerde, OUTPUT);
+  pinMode(buzzer, OUTPUT);
+  
+  digitalWrite(ledRojo,HIGH);//Encendemos el LED rojo
+  digitalWrite(ledVerde,LOW);//Apagamos el LED verde
+  
+  //Inicializamos el LCD
+  lcd.begin(screenWidth, screenHeight);
+  lcd.clear();//Borramos
+  lcd.setCursor(0,0);//Situamos el cursor en la línea 1
+  lcd.print("Introduzca clave");//Escribimos
+  lcd.setCursor(cursor,1);//Situamos el cursor en la línea 2
+}
+
+void loop()
+{
+ char pulsacion = myKeypad.getKey();//Leemos la pulsación
+ if(pulsacion!=0)//Si hemos pulsado
+ {
+   if(pulsacion != '#' && pulsacion != '*' && clave == 0)//Y no ha sido # (almohadilla) ni * (asterisco)
+   {
+     lcd.print(pulsacion);//Escribimos la pulsación
+     cursor++;//Incrementamos la posición del cursor
+     //Tono de pulsación
+     tone(buzzer,350);
+     delay(200);
+     noTone(buzzer);
+     
+     if (pulsacion == codigoSecreto[posicion])//Si la pulsación se corresponde con la clave
+     {
+       posicion ++;//Incrementamos la posición a comparar
+     }
+     if (posicion == 4)// Si todas las pulsaciones coinciden con la clave
+     {
+       lcd.clear();//Borramos
+       lcd.setCursor(0,0);//Situamos el cursor en la línea 1
+       lcd.print("Clave correcta");//Escribimos
+       //Tono de clave correcta
+       delay(2000);
+       tone(buzzer,500);
+       delay(100);
+       noTone(buzzer);
+       tone(buzzer,600);
+       delay(100);
+       noTone(buzzer);
+       tone(buzzer,800);
+       delay(100);
+       noTone(buzzer);
+       
+       clave=1;//Indicador de clave correcta
+       
+       digitalWrite(ledRojo,LOW);//Apagamos el LED rojo
+       digitalWrite(ledVerde,HIGH);//Encendemos el LED verde
+     }
+     if(cursor>8)//Si hemos pulsado 4 números
+     {
+       //Inicializamos las variables
+       cursor=5;
+       posicion=0;
+       if(clave==0)//Y la clave no es correcta
+       {
+         lcd.clear();//Borramos
+         lcd.setCursor(0,0);//Situamos el cursor en la línea 1
+         lcd.print("Clave incorrecta");//Escribimos
+         //Tono de clave incorrecta
+         tone(buzzer,70,500);
+         delay(250);
+         noTone(buzzer);
+         delay(1500);
+         lcd.clear();//Borramos
+         lcd.setCursor(0,0);//Situamos el cursor en la línea 1
+         lcd.print("Introduzca clave");//Escribimos
+         lcd.setCursor(5,1);//Situamos el cursor en la línea 2
+       }
+     }
+   }
+ }
+  if(pulsacion=='*')//Si pulsamos * (asterisco)
+  {
+    //Inicializamos las variables 
+    posicion =0;
+    cursor=5;
+    clave=0;
+    posicion=0;
+    
+    lcd.clear();//Borramos
+    lcd.setCursor(0,0);//Situamos el cursor en la línea 1
+    lcd.print("Introduzca clave");//Escribimos
+    lcd.setCursor(5,1);//Situamos el cursor en la línea 2
+    
+    digitalWrite(ledRojo,HIGH);//Encendemos el LED rojo
+    digitalWrite(ledVerde,LOW);//Apagamos el LED verde
+  }
+}
+```
