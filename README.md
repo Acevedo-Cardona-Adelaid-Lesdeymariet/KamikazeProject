@@ -1721,7 +1721,9 @@ Con este proyecto se puede observar que para realizar un proyecto como lo es un 
 
 ### Victor Manuel Gastelum Coronado ###
 
-El proyecto es una muestra de nuestra capacidad como alumnos, nos permite determinar qué tan avanzados vamos en la comprensión de circuitos electrónicos, en el lado lógico de la información hay una estructura Qué es fácil de entender para cualquier programador ya que no ocupa mucha ciencia sin embargo es necesario practicar un poco más los sistemas electrónicos ya que puede ser problemático sólo aprender el lado lógico del problema. Los datos que se han recabado han funcionado como trampolín para el entendimiento de un circuito mejorando nuestra capacidad de reconocer los elementos al momento de ver los y entender sus funciones y puntos en los que tienen que conectarse, ese fue una de las mejores habilidades que aprendieron durante esta práctica qué es la capacidad de reconocer el sensor al momento y entender su funcionamiento dentro de un circuito
+El proyecto es una muestra de nuestra capacidad como alumnos, nos permite determinar qué tan avanzados vamos en la comprensión de circuitos electrónicos, en el lado lógico de la información hay una estructura qué es fácil de entender para cualquier programador ya que no ocupa mucha ciencia, sin embargo, es necesario practicar un poco más los sistemas electrónicos ya que puede ser problemático sólo aprender el lado lógico del problema. 
+
+Los datos que se han recabado han funcionado como trampolín para el entendimiento de un circuito mejorando nuestra capacidad de reconocer los elementos al momento de verlos y entender sus funciones y puntos en los que tienen que conectarse, ese fue una de las mejores habilidades que aprendimos durante esta práctica qué es la capacidad de reconocer el sensor al instante y entender su funcionamiento dentro de un circuito.
 
 ### Portilla Amparan Josue ###
 
