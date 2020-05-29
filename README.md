@@ -851,6 +851,13 @@ La tecnología ha ido avanzando con el tiempo, hace unos cuantos años se pensab
 
 Lo mismo pasa con la domótica, esta aun se ve como algo de ciencia ficción, pero cada vez se encuentra un poco más al alcance de nuestras manos, aunque uno debe tener el dinero para poder costearse uno de estos sistemas, pero por mientras, estudiantes pueden experimentar con ello con pequeñas prácticas o proyectos como este, donde podemos ver el alcance que tiene e ir mejorando poco a poco esta tecnología. La domótica ya existe, pero no es perfecta, y esto se pudo ver en nuestro proyecto.
 
+### Gallardo Dueñas Carlos Ivan ###
+
+El proyecto consta de un conjunto de sensores que trabajan en conjunto para generar un sistema de alarmas casero,se puede ver que con un par de componentes y sensores se puede generar un proyecto que simula una herramienta bastante útil y que podemos ver en uso. De esta manera podemos ver como funcionan más a profundidad y como van interactuando cada uno de los componentes en conjunto. Con respecto al trabajo en equipo se puede observar como cada circuito hecho realiza una tarea específica que puede realizar algo pero al juntar todos los circuitos se puede obtener una función mucho más grande. 
+
+Con este proyecto se puede observar que para realizar un proyecto como lo es un sistema de alarmas no se necesita de muchos recursos o dinero así como este proyecto hay muchos otros proyectos que se pueden crear con un par de componentes y el conocimiento necesario.
+
+
 ## Referencias ##
 
 ## Video ##
