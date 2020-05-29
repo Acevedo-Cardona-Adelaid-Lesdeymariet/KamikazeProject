@@ -857,6 +857,13 @@ El proyecto consta de un conjunto de sensores que trabajan en conjunto para gene
 
 Con este proyecto se puede observar que para realizar un proyecto como lo es un sistema de alarmas no se necesita de muchos recursos o dinero así como este proyecto hay muchos otros proyectos que se pueden crear con un par de componentes y el conocimiento necesario.
 
+### Victor Manuel Gastelum Coronado ###
+
+El proyecto es una muestra de nuestra capacidad como alumnos, nos permite determinar qué tan avanzados vamos en la comprensión de circuitos electrónicos, en el lado lógico de la información hay una estructura Qué es fácil de entender para cualquier programador ya que no ocupa mucha ciencia sin embargo es necesario practicar un poco más los sistemas electrónicos ya que puede ser problemático sólo aprender el lado lógico del problema. Los datos que se han recabado han funcionado como trampolín para el entendimiento de un circuito mejorando nuestra capacidad de reconocer los elementos al momento de ver los y entender sus funciones y puntos en los que tienen que conectarse, ese fue una de las mejores habilidades que aprendieron durante esta práctica qué es la capacidad de reconocer el sensor al momento y entender su funcionamiento dentro de un circuito
+
+### Portilla Amparan Josue ###
+
+Creo que este proyecto incluye varia información de la que fue adquirida durante el semestre por lo que considero que es muy importante haberlo hecho con dedicación y aprender de el en sus varios componentes, es una buena forma de practicar y aprender cosas nuevas, además de que podría llegar a ser un proyecto que pueda ser ampliado en algún futuro para darle un mayor uso y poder aplicarlo en algún ámbito no escolar.
 
 ## Referencias ##
 
