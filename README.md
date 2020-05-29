@@ -98,7 +98,7 @@ Como se puede apreciar en la imagen anterior la diferencia más notoria es que e
 
 Este proyecto tiene como objetivo elaborar una alarma doméstica junto con un sistema de detección de intrusos que permita avisar al usuario de la intromisión de agentes externos en su domicilio. 
 
-La realización de dicho proyecto se ha llevado a cabo por un equipo compuesto de 4 integrantes y se ha dividido en 5 prácticas:
+La realización de dicho proyecto se ha llevado a cabo por un equipo compuesto de 5 integrantes y por consiguiente se ha dividido en 5 prácticas:
 
 - **Práctica 1:** Módulo Sensor Ultrasónico.
 - **Práctica 2:** Módulo Sensor PIR.
