@@ -862,4 +862,8 @@ Con este proyecto se puede observar que para realizar un proyecto como lo es un 
 
 ## Video ##
 
+https://youtu.be/6_XahT1sUFg
+
 ## Proyecto en Tinkercad para Simular ##
+
+https://www.tinkercad.com/things/kvNQvMjeGlg
