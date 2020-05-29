@@ -1706,6 +1706,19 @@ Creo que este proyecto incluye varia información de la que fue adquirida durant
 
 ## Referencias ##
 
+1. [J. Case, Comunicación Serial entre Arduinos.](http://robotic-controls.com/learn/arduino/arduino-arduino-serial-communication)
+2. [Rony Misael Paz Juarez, Alarma de Distancia Tinkercad.](https://www.youtube.com/watch?v=dkeoRxhXni4)
+3. [Arduino | 37 in 1 Sensors Kit Explained.](https://www.instructables.com/id/Arduino-37-in-1-Sensors-Kit-Explained/)
+4. [D. Nedelkovski, Ultrasonic Sensor HC-SR04 and Arduino Tutorial.](http://howtomechatronics.com/tutorials/arduino/ultrasonic-sensor-hc-sr04/)
+5. [J. Peng, Arduino Home Security System.](https://www.youtube.com/watch?v=dRCnccv_dVE)
+6. [Bitwise Ar - Módulo PIR (Sensor de Movimiento Infrarrojo Pasivo).](https://www.youtube.com/watch?v=eFoa88s6yZY)
+7. [Bitwise Ar - Teclado Matricial KeyPad 4x4 y Simple Control de Acceso.](https://www.youtube.com/watch?v=9ligsi5Bgv8)
+8. [Bitwise Ar - Módulo LCD 1602A con Librería LiquidCrystal.](https://www.youtube.com/watch?v=JEZiHQY-JPI)
+9. [appytechie, Home Alarm System.](https://www.instructables.com/id/HOME-ALARM-SYSTEM/)
+10. [barzillialloyd, Arduino Home Security System.](https://www.instructables.com/id/Arduino-Home-Security-System/)
+11. S. Fitzgerald and M. Shiloh, Arduino Projects Book. 
+12. M. Margolis, Arduino Cookbook. 
+
 ## Anexos ##
 
 [Video Explicativo del Proyecto](https://youtu.be/6_XahT1sUFg)
