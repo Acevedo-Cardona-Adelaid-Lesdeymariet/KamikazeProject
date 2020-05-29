@@ -162,6 +162,23 @@ También hemos empleado las siguientes plataformas:
 
 ## Costos ##
 
+|                 Material                | Precio Individual | Precio Total |                  Fuente                 |
+|:---------------------------------------:|:-----------------:|:------------:|:---------------------------------------:|
+|              2 Arduino UNO.             |      $549.00      |   $1,098.00  |             Arduino UNO Rev3            |
+|              2 Protoboard.              |       $67.21      |    $134.42   |             Mini Protoboard             |
+|              3 LEDs Rojos.              |       $2.40       |     $7.20    |             LED Rojo de 5 mm            |
+|               1 LED Verde.              |       $2.40       |     $2.40    |            LED Verde de 5 mm            |
+|             1 LED Amarillo.             |       $2.40       |     $2.40    |           LED Amarillo de 5 mm          |
+|                1 Buzzer.                |       $39.21      |    $39.21    |              Buzzer Pasivo              |
+|              1 KeyPad 4x4.              |       $38.40      |    $38.40    |      Teclado Numérico Matricial 4x4     |
+|               1 LCD 16x2.               |       $63.21      |    $63.21    |             Display LCD 16x2            |
+|         7 Resistencias de 220 Ω.        |       $1.60       |     $11.2    |         Resistencia de 220 Ohms         |
+|        1 Potenciómetro de 250 kΩ.       |       $20.00      |    $20.00    |        Potenciómetro de 250 kOhms       |
+| 1 Módulo de Sensor Ultrasonico HC-SR04. |       $47.21      |    $47.21    |            Sensor Ultrasónico           |
+|         2 Sensores PIR HC-SR501.        |       $63.21      |    $126.42   |         Sensor de Movimiento PIR        |
+|           Cables de Conexión.           |       $72.00      |    $72.00    | Juego de 80 Cables de 15 cm Tipo DuPont |
+|                                         |      **Total:**       |   **$1,662.07**  |                                         |
+
 ## Montaje del Proyecto ##
 
 ### Practica 1: Sensor Ultrasónico  ###
