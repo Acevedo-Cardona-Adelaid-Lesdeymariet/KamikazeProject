@@ -1672,7 +1672,7 @@ Creemos que este proyecto tiene bastantes extensiones posibles. Algunas de las q
 4.	Adicionalmente, nos gustaría estudiar la posibilidad de que el usuario pueda desactivar la alarma de forma más sencilla, sin necesidad de introducir la clave. Para ello, habría dos opciones: 
    
     1. Crear una aplicación móvil que le permita activar la alarma y desactivarla de forma remota. 
-    1. Utilizar un sistema de identificación por RFID (módulo lector RFID-RC522 RF) para desactivar la alarma. 
+    2. Utilizar un sistema de identificación por RFID (módulo lector RFID-RC522 RF) para desactivar la alarma. 
 
 5.	Se podría añadir un apartado de configuración que permita programar la alarma para un calendario específico, de manera que ésta se conecte y desconecte en las fechas y horas indicadas por el usuario. Aplicando también un encendido y apagado de luces a determinadas horas para simular presencia durante un período en el que no estemos en casa. 
 
@@ -1726,7 +1726,7 @@ Creo que este proyecto incluye varia información de la que fue adquirida durant
 
 1. [J. Case, Comunicación Serial entre Arduinos.](http://robotic-controls.com/learn/arduino/arduino-arduino-serial-communication)
 2. [Rony Misael Paz Juarez, Alarma de Distancia Tinkercad.](https://www.youtube.com/watch?v=dkeoRxhXni4)
-3. [Arduino | 37 in 1 Sensors Kit Explained.](https://www.instructables.com/id/Arduino-37-in-1-Sensors-Kit-Explained/)
+3. [Arduino 37 in 1 Sensors Kit Explained.](https://www.instructables.com/id/Arduino-37-in-1-Sensors-Kit-Explained/)
 4. [D. Nedelkovski, Ultrasonic Sensor HC-SR04 and Arduino Tutorial.](http://howtomechatronics.com/tutorials/arduino/ultrasonic-sensor-hc-sr04/)
 5. [J. Peng, Arduino Home Security System.](https://www.youtube.com/watch?v=dRCnccv_dVE)
 6. [Bitwise Ar - Módulo PIR (Sensor de Movimiento Infrarrojo Pasivo).](https://www.youtube.com/watch?v=eFoa88s6yZY)
