@@ -162,6 +162,10 @@ También hemos empleado las siguientes plataformas:
 
 ### Practica 1: Sensor Ultrasónico  ###
 
+<p align="center">
+<img src="https://2.bp.blogspot.com/-f45ht1KiLKY/WEPuVRaHbkI/AAAAAAAAFXU/1rS9kibzqk8xse9Pem4oCIUTgIJW1EWEACLcB/s1600/modulo-HC-SR04-arduino-2.jpg" alt="Sensor Ultrasónico" width="250"/>
+</p>
+
 #### Descripción de la Práctica ####
 
 El objetivo principal de esta práctica es aprender a utilizar el módulo sensor de ultrasonido. El sensor de ultrasonido es el responsable de medir distancias para evitar obstáculos.
@@ -252,3 +256,7 @@ void loop()
 }
 ```
 ### Práctica 2: Sensor PIR ###
+
+<p align="center">
+<img src="https://www.puntoflotante.net/SENSOR-HC-SR501-1000-M.jpg" alt="Sensor PIR" width="300"/>
+</p>
