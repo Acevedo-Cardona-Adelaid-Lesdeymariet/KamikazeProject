@@ -529,6 +529,10 @@ if(proximity == HIGH)
 
 ### Práctica 4: Pantalla LCD 16x2 y KeyPad 4x4 ###
 
+<p align="center">
+<img src="img/i21.png" width="350"/>
+</p>
+
 #### Descripción de la Práctica ####
 
 El objetivo principal de esta práctica es aprender a utilizar periféricos de entrada y salida de datos. Para ello utilizaremos un teclado matricial como dispositivo de entrada, el cual permitirá la introducción de claves numéricas, y una pantalla LCD como dispositivo de salida, donde se mostrará al usuario una serie de instrucciones y los números que el usuario haya introducido. 
