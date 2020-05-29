@@ -852,9 +852,9 @@ Los pasos a seguir son los siguientes:
 
 #### Contexto ####
 
-Este conjunto de prácticas están pensadas para llevarse a cabo en la asignatura de 5to Semestre de Arquitectura de Computadoras con Serie SCD - 1003 correspondiente a la Ing. Sistemas Computacionales impartida en el Instituto Tecnológico de Tijuana.
+Este conjunto de prácticas están pensadas para llevarse a cabo en la asignatura de 7mo Semestre de Sistemas Programables con Serie SCC - 1023 correspondiente a la Ing. Sistemas Computacionales impartida en el Instituto Tecnológico de Tijuana.
 
-En particular, esta asignatura tiene divididos sus temas en cuatro unidades con diversas actividades que permiten conocer el uso de microcontroladores como Arduino. 
+En particular, esta asignatura tiene divididos sus temas en seis unidades con diversas actividades que permiten conocer el uso de microcontroladores como Arduino. 
 
 Los objetivos concretos de lo que sería la unidad didáctica relativa a Arduino son los siguientes: 
 
@@ -869,7 +869,7 @@ Ahora que hemos dado a conocer el contexto por el que elaboramos este conjunto d
 1.	Auge de la Domótica y el uso de Microcontroladores.
 2.	Las aplicaciones para dispositivos conectados a internet son amplias (IoT o Internet de las Cosas). 
 3.	Una alarma es una aplicación real que llama mucho la atención de aquellos alumnos que apenas se van iniciando en el mundo de la electrónica. Cuanta más utilidad vean en el trabajo que están realizando, más fácil será conseguir motivarlos e implicarlos en el proyecto que se desea elaborar.
-4.	En la materia de Arquitectura de Computadoras se enseña a usar actuadores y sensores con arduino. Por lo tanto, un proyecto que es capaz de englobar a todos ellos parece perfecto a modo de conclusión para demostrar y poner en práctica nuestros conocimientos adquiridos durante todo el semestre. Además, este proyecto no es tan complejo, por lo que puede llevarse a cabo por grupos reducidos de alumnos sin problema alguno.
+4.	En la materia de Sistemas Programables se enseña a usar actuadores y sensores con arduino. Por lo tanto, un proyecto que es capaz de englobar a todos ellos parece perfecto a modo de conclusión para demostrar y poner en práctica nuestros conocimientos adquiridos durante todo el semestre. Además, este proyecto no es tan complejo, por lo que puede llevarse a cabo por grupos reducidos de alumnos sin problema alguno.
 
 #### Material Utilizado ####
 
