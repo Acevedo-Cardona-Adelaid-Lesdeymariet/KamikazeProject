@@ -164,19 +164,19 @@ También hemos empleado las siguientes plataformas:
 
 |                 Material                | Precio Individual | Precio Total |                  Fuente                 |
 |:---------------------------------------:|:-----------------:|:------------:|:---------------------------------------:|
-|              2 Arduino UNO.             |      $549.00      |   $1,098.00  |             Arduino UNO Rev3            |
-|              2 Protoboard.              |       $67.21      |    $134.42   |             Mini Protoboard             |
-|              3 LEDs Rojos.              |       $2.40       |     $7.20    |             LED Rojo de 5 mm            |
-|               1 LED Verde.              |       $2.40       |     $2.40    |            LED Verde de 5 mm            |
-|             1 LED Amarillo.             |       $2.40       |     $2.40    |           LED Amarillo de 5 mm          |
-|                1 Buzzer.                |       $39.21      |    $39.21    |              Buzzer Pasivo              |
-|              1 KeyPad 4x4.              |       $38.40      |    $38.40    |      Teclado Numérico Matricial 4x4     |
-|               1 LCD 16x2.               |       $63.21      |    $63.21    |             Display LCD 16x2            |
-|         7 Resistencias de 220 Ω.        |       $1.60       |     $11.2    |         Resistencia de 220 Ohms         |
-|        1 Potenciómetro de 250 kΩ.       |       $20.00      |    $20.00    |        Potenciómetro de 250 kOhms       |
-| 1 Módulo de Sensor Ultrasonico HC-SR04. |       $47.21      |    $47.21    |            Sensor Ultrasónico           |
-|         2 Sensores PIR HC-SR501.        |       $63.21      |    $126.42   |         Sensor de Movimiento PIR        |
-|           Cables de Conexión.           |       $72.00      |    $72.00    | Juego de 80 Cables de 15 cm Tipo DuPont |
+|              2 Arduino UNO.             |      $549.00      |   $1,098.00  |             [Arduino UNO Rev3](https://www.amazon.com.mx/Arduino-Org-A000066-R3-microcontrolador-a000066/dp/B008GRTSV6/ref=sr_1_6?__mk_es_MX=%C3%85M%C3%85%C5%BD%C3%95%C3%91&keywords=Arduino+UNO&qid=1590637262&sr=8-6)            |
+|              2 Protoboard.              |       $67.21      |    $134.42   |             [Mini Protoboard](https://www.steren.com.mx/mini-protoboard-de-1-bloque-y-2-tiras.html)             |
+|              3 LEDs Rojos.              |       $2.40       |     $7.20    |             [LED Rojo de 5 mm](https://www.steren.com.mx/led-de-5-mm-color-rojo-claro.html)            |
+|               1 LED Verde.              |       $2.40       |     $2.40    |            [LED Verde de 5 mm](https://www.steren.com.mx/led-de-5-mm-color-verde-claro.html)            |
+|             1 LED Amarillo.             |       $2.40       |     $2.40    |           [LED Amarillo de 5 mm](https://www.steren.com.mx/led-de-5-mm-color-ambar-claro.html)          |
+|                1 Buzzer.                |       $39.21      |    $39.21    |              [Buzzer Pasivo](https://www.steren.com.mx/buzzer-pasivo.html)              |
+|              1 KeyPad 4x4.              |       $38.40      |    $38.40    |      [Teclado Numérico Matricial 4x4](https://www.steren.com.mx/teclado-numerico-matricial-4-x-4.html)     |
+|               1 LCD 16x2.               |       $63.21      |    $63.21    |             [Display LCD 16x2](https://www.steren.com.mx/display-lcd-2x16.html)            |
+|         7 Resistencias de 220 Ω.        |       $1.60       |     $11.2    |         [Resistencia de 220 Ohms](https://www.steren.com.mx/resistencia-de-carbon-de-1-watt-al-5-de-tolerancia-de-220-ohms.html)         |
+|        1 Potenciómetro de 250 kΩ.       |       $20.00      |    $20.00    |        [Potenciómetro de 250 kOhms](https://articulo.mercadolibre.com.mx/MLM-654191642-potenciometro-con-escala-y-perilla-250k-ohm-_JM?quantity=1#position=3&type=item&tracking_id=8b4be561-1f1f-4a78-80cf-669f609bf916)       |
+| 1 Módulo de Sensor Ultrasonico HC-SR04. |       $47.21      |    $47.21    |            [Sensor Ultrasónico](https://www.steren.com.mx/sensor-ultrasonico.html)           |
+|         2 Sensores PIR HC-SR501.        |       $63.21      |    $126.42   |         [Sensor de Movimiento PIR](https://www.steren.com.mx/sensor-de-movimiento-pir.html)        |
+|           Cables de Conexión.           |       $72.00      |    $72.00    | [Juego de 80 Cables de 15 cm Tipo DuPont](https://www.steren.com.mx/juego-de-80-cables-de-15-cm-tipo-dupont.html) |
 |                                         |      **Total:**       |   **$1,662.07**  |                                         |
 
 ## Montaje del Proyecto ##
