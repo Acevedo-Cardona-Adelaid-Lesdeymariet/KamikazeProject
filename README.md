@@ -888,9 +888,730 @@ A continuación se muestran 4 diagramas de flujo de las 4 partes principales de 
 </p>
 
 #### Simulación ####
+
+A continuación mostramos las fotos del montaje completo en Tinkercad. La primera foto muestra el montaje con el circuito apagado/desactivado:
+
+<p align="center">
+<img src="img/i19.png" width="604"/>
+</p>
+
+En la siguiente imagen podemos ver que el led amarillo está encendido, ya que la alarma está activada, el sistema nos está pidiendo la contraseña y además se está detectando una presencia en la habitación “vigilada” por el sensor de ultrasonidos, por lo que el led rojo central está encendido también, alertándonos de la presencia de intrusos. 
+
+<p align="center">
+<img src="img/i20.png" width="607"/>
+</p>
+
 #### Código Fuente ####
+
+En este apartado se muestra el código resultante que hace funcionar nuestro proyecto. Hay dos códigos diferentes, uno por cada uno de los Arduino UNO que estamos utilizando, ya que como hemos dicho previamente, cada uno de ellos necesita unas “instrucciones” específicas para funcionar y hacer su trabajo. 
+
 ##### Arduino 1 #####
+
+```cpp
+// mirar https://www.arduino.cc/en/Tutorial/EEPROMWrite
+// include the library code:
+#include <LiquidCrystal.h>
+#include <Keypad.h>
+
+/*This is the Sender arduino*/
+#include <EEPROM.h>
+
+int rx = 0;
+int tx = 1;
+
+/*-------------------------------KEYPAD---------------------------------------*/
+const byte numRows= 4; //number of rows on the keypad
+const byte numCols= 4; //number of columns on the keypad
+char keypressed;
+char keymap[numRows][numCols]=
+{
+{'1', '2', '3', 'A'},
+{'4', '5', '6', 'B'},
+{'7', '8', '9', 'C'},
+{'*', '0', '#', 'D'},
+};
+
+//Code that shows the the keypad connections to the arduino terminals
+byte rowPins[numRows] = {7,6,5,4};//Rows 0 to 3
+byte colPins[numCols] = {A0,A1,A2,A3};//Columns 0 to 3             
+//initializes an instance of the Keypad class
+Keypad myKeypad= Keypad(makeKeymap(keymap), rowPins, colPins, numRows, numCols);
+
+/*------------------------ FIN DEL KEYPAD---------------------------------------*/
+
+// initialize the library with the numbers of the interface pins
+LiquidCrystal lcd(12, 11, 10, 9, 8, 13);
+
+// LCD Screen Resolution.
+int screenWidth = 16;
+int screenHeight = 2;
+
+// the two lines
+String lineOne, lineTwo;
+
+// reference flags
+int stringStart, stringStop, displayMode, i = 0;
+int scrollCursor = screenWidth;
+
+String linea1 = "1 Set alarm";
+String linea2 = "2 Set 1/2 alarm";
+String linea3 = "3 Change passwd";
+String linea4 = "4 Manual config";
+String linea1Act = "Alarm set";
+String linea2Act = "Enter passwd";
+bool alarmSet = false;
+bool startAlarm = true;
+
+// estados de la alarma
+enum State { NONE, ALARM_SET, CHOSEN_ONE, CHOSEN_TWO, CHOSEN_THREE, CHOSEN_FOUR };
+State estado;
+
+void changePass();
+
+void setup() {
+  // set up the LCD's number of columns and rows:
+  lcd.begin(screenWidth, screenHeight);
+  
+  Serial.begin (112500);  
+  //initialize UART pins
+  pinMode (rx, OUTPUT);
+  pinMode (tx, INPUT);
+  
+  lcd.clear();
+  lcd.setCursor(0,0);     // situamos el cursor el la posición 2 de la linea 0.
+  estado = NONE;
+}
+
+char codigoSecreto[4] = {'2','2','5','5'}; // Aqui va el codigo secreto
+int cursor = 5;
+int clave=0; // para el LCD
+int posicion=0; // necesaria para la clave
+
+void changePass() {
+  bool wrong = false;
+  int num1, num2, num3, num4;
+  int cont = 0;
+  
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("New passwd:");
+  lcd.setCursor(1,1);
+  lcd.print(">>> ");
+  
+  while(cont < 4) {
+    keypressed = myKeypad.getKey(); 
+
+    if (keypressed != 0) //Si el valor es 0 es que no se ha pulsado ninguna tecla
+    { // descartamos almohadilla y asterisco
+      codigoSecreto[cont] = keypressed;
+      lcd.print(keypressed);
+      cont++;
+    }
+  } 
+  
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("Passwd updated.");
+  delay(2000);
+  
+  // lo guardamos en la eeprom para que la siguiente vez empiece con ese
+  EEPROM.write(0, (int)codigoSecreto[0]);
+  EEPROM.write(1, (int)codigoSecreto[1]);
+  EEPROM.write(2, (int)codigoSecreto[2]);
+  EEPROM.write(3, (int)codigoSecreto[3]);
+}
+
+void compruebaNumYActua(int num) {  
+  if (keypressed == '1') {
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("Alarm set!");
+    estado = CHOSEN_ONE;
+    
+    alarmSet = true;
+    startAlarm = true;
+    
+    byte dataR = 1; // lo que le mandamos al otro arduino
+    Serial.print(dataR);
+    delay(300);
+    dataR = 2;
+    Serial.print(dataR);
+    delay(300);
+    
+  } else if (keypressed == '2') {
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("Half alarm set!"); 
+    estado = CHOSEN_TWO;
+    
+    alarmSet = true;
+    startAlarm = true;
+    
+    byte dataR = 5;
+    Serial.print(dataR);
+    delay(100);
+    
+  } else if (keypressed == '3') {
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("Changing pass!");
+    changePass();
+    delay(100);
+    estado = CHOSEN_THREE;
+    
+  } else if (keypressed == '4') {
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("You pressed 4!");
+    estado = CHOSEN_FOUR;
+  }
+}
+
+void clearBuffer() {
+ //clear out the serial buffer
+
+ byte w = 0;
+
+ for (int i = 0; i < 10; i++)
+ {
+   while (Serial.available() > 0)
+   {
+     char k = Serial.read();
+     w++;
+     delay(1);
+   }
+   delay(1);
+ } 
+}
+
+void setupTeclado() 
+{
+  cursor = 5;
+  clave = 0;
+  posicion = 0;
+  lcd.begin(16,2);      
+  lcd.setCursor(0,0);     // situamos el cursor el la posición 2 de la linea 0.
+  lcd.print("Introduzca clave"); // escribimos en LCD
+  lcd.setCursor(cursor,1); // cursor en la posición de la variable, linea 1
+}
+
+void loopTeclado() 
+{  
+  char pulsacion = myKeypad.getKey() ; // leemos pulsación
+  int numPulsaciones = 0;
+  if (pulsacion != 0) //Si el valor es 0 es que no se ha pulsado ninguna tecla
+  { // descartamos almohadilla y asterisco
+    if (pulsacion != '#' && pulsacion != '*' && clave==0)
+    { 
+      lcd.print(pulsacion); // imprimimos pulsación
+      numPulsaciones++;
+      cursor++;  
+      delay(200);
+      
+      //--- Condicionales para comprobar la clave introducida -----------
+      // comparamos entrada con cada uno de los dígitos, uno a uno
+      if (pulsacion == codigoSecreto[posicion]){
+        posicion ++; // aumentamos posicion si es correcto el digito
+      }
+      
+      if (posicion == 4)
+      { 
+        // se han introducido los 4 correctamente
+        byte dataX = 0; // lo que le mandamos al otro arduino
+        Serial.print(dataX);
+        delay(300);
+        
+        lcd.setCursor(0,0);      // situamos el cursor el la pos 0 de la linea 0.
+        lcd.print("Clave correcta  ");         // escribimos en LCD
+        delay(300);
+        
+        dataX = 6; // lo que le mandamos al otro arduino
+        Serial.print(dataX);
+        delay(300);
+        
+        //startAlarm = true;
+        alarmSet = false; // Disarmed!!!!! lo quitamos!
+       
+        clave=1; // indicamos que se ha introducido la clave
+           
+        dataX = 0;
+        Serial.print(dataX);
+        delay(300);
+      } 
+
+      if (numPulsaciones >=4 && posicion != 4) {
+         delay(200);
+        byte dataR = 3; // lo que le mandamos al otro arduino
+         Serial.print(dataR);
+         delay(200);
+      }
+
+     //--- En el caso de que esté incompleta o no hayamos acertado ----------
+     if(cursor>8)        // comprobamos que no pase de la cuarta posición
+     {  
+       cursor=5;     // lo volvemos a colocar al inicio
+       posicion=0;           // borramos clave introducida
+       lcd.setCursor(5,1);
+       lcd.print("    ");       // borramos la clave de la pantalla
+       lcd.setCursor(5,1);
+       if(clave==0)         // comprobamos que no hemos acertado
+       { 
+         delay(100);
+         // notificamos al otro arduino del error
+         byte dataR = 3; // lo que le mandamos al otro arduino
+         Serial.print(dataR);
+         delay(100);
+         
+       }
+     }
+    }
+  } 
+
+ //--- Condicionales para resetear clave introducida -------------
+ if (pulsacion == '*')
+ { // asterisco para resetear el contador
+   posicion = 0;
+   cursor = 5;
+   clave=0;
+   posicion=0;
+   lcd.setCursor(0,0); // situamos el cursor el la posición 2 de la linea 0.
+   lcd.print("Introduzca clave"); // escribimos en LCD
+   lcd.setCursor(5,1);
+   lcd.print("    "); // borramos de la pantalla los números
+   lcd.setCursor(5,1);
+ }
+}
+
+void loop() {
+  
+  int val1, val2, val3, val4;
+  
+  // leemos la clave que esta guardada
+  val1 = EEPROM.read(0);
+  val2 = EEPROM.read(1);
+  val3 = EEPROM.read(2);
+  val4 = EEPROM.read(3);
+  
+  if (val1 == 0 && val2 == 0 && val3 == 0 && val4 == 0) {
+    // guardamos en la eeprom el codigo secreto inicial
+    EEPROM.write(0, (int)codigoSecreto[0]);
+    EEPROM.write(1, (int)codigoSecreto[1]);
+    EEPROM.write(2, (int)codigoSecreto[2]);
+    EEPROM.write(3, (int)codigoSecreto[3]);
+  }
+  
+  // leemos la clave que esta guardada
+  val1 = EEPROM.read(0);
+  val2 = EEPROM.read(1);
+  val3 = EEPROM.read(2);
+  val4 = EEPROM.read(3);
+  
+  if (!alarmSet) {
+    setup();
+    // 1. Activar alarma 
+    // 2. Activar alarma (media alarma)
+    // 3. Cambiar passwd
+    // 4. Configuración manual (activar/desactivar aparatos de uno en uno)
+
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print(linea1);
+    lcd.setCursor(0, 1);
+    lcd.print(linea2);
+    delay(1000);
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print(linea2);
+    lcd.setCursor(0, 1);
+    lcd.print(linea3);
+    delay(1000);
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print(linea3);
+    lcd.setCursor(0, 1);
+    lcd.print(linea4);
+    delay(1000);
+    
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("Chosen value: "); 
+    lcd.setCursor(0,1);
+    lcd.print(">>> ");
+
+    bool wrong = false;
+    while(true) {
+      keypressed = myKeypad.getKey();   
+
+      if (keypressed != 0) //Si el valor es 0 es que no se ha pulsado ninguna tecla
+      { // descartamos almohadilla y asterisco
+        if (keypressed != '#' && keypressed != '*' && keypressed <= '4') {   
+          lcd.print(keypressed); 
+          break;
+        } 
+        if (keypressed > '4') {
+          lcd.clear();
+          lcd.setCursor(0,0);
+          lcd.print("Wrong value!");
+          lcd.setCursor(0,1);
+          lcd.print(keypressed);
+          lcd.setCursor(1,1);
+          lcd.print(" not valid :(");
+          wrong = true;
+          break;
+        }  
+      } 
+    }
+
+    delay(200);
+
+    // Si el numero es correcto, vemos que tenemos que hacer con el
+    if (!wrong) {
+      compruebaNumYActua(keypressed);
+    } 
+    delay(200); 
+  }
+  else {
+    // parte de la alarma */
+    if (startAlarm == true) {
+      setupTeclado();
+      startAlarm = false;
+    }
+    loopTeclado();
+    if (alarmSet == false) {
+      delay(200); 
+    }
+  }
+}
+```
+
 ##### Arduino 2 #####
+
+```cpp
+#include <EEPROM.h>
+
+int rx = 0;
+int tx = 1;
+
+int buzzer = 5;
+
+// detectores
+int ultrasonido = 8; 
+int pirPin = 7;
+int pirPin2 = 13;
+
+// leds
+int ledNaranja = 3;
+int ledVerde = 12; 
+int ledPinRojoH1 = 9;  
+int ledPinRojoH2 = 10;
+int ledPinRojoH3 = 11;
+
+byte val; // value read on from the serial port
+byte dataR; //it contains the byte read from EEPROM
+
+enum State { NONE, FULL_ALARM, HALF_ALARM, ALARM_SPLIT };
+State estado;
+long readUltrasonicDistance(int pin);
+void loopAlarmaCompleta();
+void enciendeMediaAlarma();
+void loopMediaAlarma();
+
+void setup()
+{ 
+  // 112500
+  Serial.begin (112500);
+  delay(500);
+  pinMode(ledNaranja, OUTPUT);
+  pinMode(ledVerde, OUTPUT);
+  
+  pinMode(buzzer, OUTPUT);
+  pinMode(ledPinRojoH1, OUTPUT);
+  pinMode(ledPinRojoH2, OUTPUT);
+  pinMode(ledPinRojoH3, OUTPUT);
+  
+  pinMode(pirPin, INPUT_PULLUP);
+  pinMode(pirPin2, INPUT_PULLUP);
+  pinMode(ultrasonido, INPUT);
+  
+  //initialize UART pins
+  pinMode (rx, OUTPUT);
+  pinMode (tx, INPUT);
+  
+  estado = NONE;
+}
+
+void apagaBuzzer() {
+  noTone(buzzer); 
+}
+void enciendeLedVerde() {
+  digitalWrite(ledVerde, HIGH);  
+}
+void enciendeLedNaranja() {
+  digitalWrite(ledNaranja, HIGH);  
+}
+void apagaLedVerde() {
+  digitalWrite(ledVerde, LOW);  
+}
+void apagaLedNaranja() {
+  digitalWrite(ledNaranja, LOW);  
+}
+void buzzer1() {
+ tone(buzzer,350); 
+}
+void buzzerClaveCorrecta() {
+  delay(200); // tono de clave correcta
+  tone(buzzer,500);
+  delay(100);
+  noTone(buzzer);
+  tone(buzzer,600);
+  delay(100);
+  noTone(buzzer);
+  tone(buzzer,800);
+  delay(100);
+  noTone(buzzer);
+}
+
+void buzzerClaveIncorrecta() {
+  delay(200); // tono de clave incorrecta
+  tone(buzzer,300);
+  delay(100);
+  noTone(buzzer);
+  tone(buzzer,100);
+  delay(100);
+  noTone(buzzer);
+}
+
+void buzzerAlarma() {
+  tone(buzzer, 800); // play 400 Hz tone for 400 ms
+  delay(200);
+  tone(buzzer, 500); // play 800Hz tone for 400ms
+  delay(200);
+  noTone(buzzer);
+}
+
+bool intrusos = false;
+bool alarmOn = false;
+bool halfAlarmOn = false;
+
+// los tres siguientes solo se activan cuando 
+// queremos encender cada habitación por separado
+bool hab1On = false;
+bool hab2On = false;
+bool hab3On = false;
+
+void desactivaDeteccion() {
+  digitalWrite(ledPinRojoH1, LOW);
+  digitalWrite(ledPinRojoH2, LOW);
+  digitalWrite(ledPinRojoH3, LOW);
+  apagaBuzzer();
+  enciendeLedVerde();
+  apagaLedNaranja();
+  alarmOn = false;
+  halfAlarmOn = false;
+
+}
+
+void loop()
+{
+  if(Serial.available() > 0)
+  {
+     val = Serial.read();  //read the next byte
+
+    /*
+    0 - enciende led verde
+    1 - apaga led verde
+    2 - enciende led naranja
+    3 - apaga led naranja
+    4 - apaga buzzer
+    5 - enciende media alarma
+    6 - desactiva detección
+    7 - activa habitación 1
+    8 - activa habitación 2
+    9 - activa habitación 3
+    10 - change pass (cambio de contraseña)
+    */
+    if (val == '0') {
+      desactivaDeteccion();
+    } else if (val == '1') {
+      apagaLedVerde();
+    } else if (val == '2') {
+      enciendeLedNaranja();
+      alarmOn = true;
+    } else if (val == '3') { 
+      buzzerClaveIncorrecta();
+    } else if (val == '4') {
+      apagaBuzzer();
+    } else if (val == '5') {
+      enciendeMediaAlarma(); 
+    } else if (val == '6') {
+      desactivaDeteccion(); 
+      // tono de clave correcta?
+      buzzerClaveCorrecta();
+    } else if (val == '7') {
+      // activa hab 1
+      hab1On = true;
+    } else if (val == '8') {
+      // activa hab 2
+      hab2On = true;
+    } else if (val == '9') {
+      // activa hab 3
+      hab3On = true;
+    }
+   
+  }  else {
+      //buzzerClaveCorrecta();
+    }
+
+  if (alarmOn) {
+    loopAlarmaCompleta();
+  } else if (halfAlarmOn) {
+    loopMediaAlarma();
+  }
+  
+  delay(200);   
+}
+
+long readUltrasonicDistance(int pin)
+{
+  pinMode(pin, OUTPUT); // Clear the trigger
+  digitalWrite(pin, LOW);
+  delayMicroseconds(2);
+  // Sets the pin on HIGH state for 10 micro seconds
+  digitalWrite(pin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(pin, LOW);
+  pinMode(pin, INPUT);
+  // Reads the pin, and returns the sound wave travel time in microseconds
+  return pulseIn(pin, HIGH);
+}
+
+void loopAlarmaCompleta() 
+{
+  bool desactivando = false; // utilizamos el valor desactivando como valor intermedio
+  // hasta que no nos informen los dos sensores de que realmente no están detectando
+  // a nadie no podemos encender el led verde como que todo está en orden. Tenemos
+  // que esperar a que ambos comprueben que no hay nadie para encender el verde
+  
+  int proximity = digitalRead(pirPin);
+  delay(100);
+  
+  int proximity2 = digitalRead(pirPin2);
+  delay(100);
+  
+  int cm = 0.01723 * readUltrasonicDistance(ultrasonido);  
+/*Serial.begin (9600);
+delay(300);
+Serial.print("cm: ");
+    Serial.println(cm);
+    delay(300);
+Serial.begin (112500);
+  */  
+
+
+  if (proximity == HIGH) // If the sensor's output goes low, motion is detected
+  {
+    digitalWrite(ledPinRojoH1, HIGH);
+    intrusos = true;
+  }
+  else
+  {
+    digitalWrite(ledPinRojoH1, LOW);
+    desactivando = true;
+  }
+  
+  if (proximity2 == HIGH) // If the sensor's output goes low, motion is detected
+  {
+    digitalWrite(ledPinRojoH3, HIGH);
+    intrusos = true;
+    desactivando = false;
+  }
+  else
+  {
+    digitalWrite(ledPinRojoH3, LOW);
+  }
+  
+  if (cm < 200) {
+    
+    digitalWrite(ledPinRojoH2, HIGH);
+    intrusos = true;
+  }
+  else
+  {
+    digitalWrite(ledPinRojoH2, LOW);
+    if (desactivando == true) {
+        intrusos = false; 
+    }
+  }
+  
+  if (intrusos) {
+    buzzerAlarma();
+  }
+}
+
+void enciendeMediaAlarma() {
+  enciendeLedNaranja();
+  apagaLedVerde();
+  halfAlarmOn = true;
+}
+
+// loop media alarma
+// equivale al plan nocturno, donde van a estar activados dos de los tres sensores
+// no queremos que el de la habitación nos detecte
+void loopMediaAlarma() 
+{
+  bool desactivando = false; // utilizamos el valor desactivando como valor intermedio
+  // hasta que no nos informen los dos sensores de que realmente no están detectando
+  // a nadie no podemos encender el led verde como que todo está en orden. Tenemos
+  // que esperar a que ambos comprueben que no hay nadie para encender el verde
+  
+  // leemos el pir pin 1
+  int proximity = digitalRead(pirPin);
+  delay(100);
+  
+  // leemos el ultrasonido
+  int cm = 0.01723 * readUltrasonicDistance(ultrasonido);
+
+/*Serial.begin (9600);
+delay(300);
+Serial.print("cm: ");
+    Serial.println(cm);
+    delay(300);
+Serial.begin (112500);
+*/
+  
+  if (proximity == HIGH) // If the sensor's output goes low, motion is detected
+  {
+    //tone(buzzer, 350, 200); 
+    digitalWrite(ledPinRojoH1, HIGH);
+    intrusos = true;
+  }
+  else
+  {
+    digitalWrite(ledPinRojoH1, LOW);
+    desactivando = true;
+  }
+
+  // comprobamos la distancia al ultrasonidos
+  // si es menor de 200 cm, encendemos el led rojo de la 
+  // habitación 2
+  if (cm < 200) {
+   // tone(buzzer, 350, 200); 
+    digitalWrite(ledPinRojoH2, HIGH);
+    intrusos = true;
+  }
+  else
+  {
+    digitalWrite(ledPinRojoH2, LOW);
+    if (desactivando == true) {
+        intrusos = false; 
+    }
+  }
+  
+  if (intrusos) {
+    buzzerAlarma();
+  }
+}
+```
 
 ## Viabilidad y Escalabilidad ##
 
@@ -912,6 +1633,13 @@ La domótica doméstica cuenta también con un gran atractivo a su favor: el aho
 ## Pruebas Realizadas ##
 
 Se han realizado múltiples pruebas para comprobar el funcionamiento del proyecto. Se listan a continuación: 
+
+
+
+
+
+
+
 
 ## Posibles Extensiones ##
 
