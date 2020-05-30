@@ -1048,7 +1048,9 @@ void changePass() {
   lcd.print("Passwd updated.");
   delay(2000);
   
-  // Lo guardamos en la eeprom para que la siguiente vez empiece con ese.
+  /* Lo guardamos en la eeprom para que la siguiente vez 
+     empiece con ese */
+     
   EEPROM.write(0, (int)codigoSecreto[0]);
   EEPROM.write(1, (int)codigoSecreto[1]);
   EEPROM.write(2, (int)codigoSecreto[2]);
