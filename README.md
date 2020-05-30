@@ -960,9 +960,9 @@ char keymap[numRows][numCols]=
 
 // Code that shows the the keypad connections to the arduino terminals.
 byte rowPins[numRows] = {7,6,5,4}; // Rows 0 to 3.
-byte colPins[numCols] = {A0,A1,A2,A3}; // Columns 0 to 3.             
+byte colPins[numCols] = {A0,A1,A2,A3}; // Columns 0 to 3.
 // Initializes an instance of the Keypad class.
-Keypad myKeypad= Keypad(makeKeymap(keymap), rowPins, colPins, numRows, 
+Keypad myKeypad= Keypad(makeKeymap(keymap), rowPins, colPins, numRows,
 numCols);
 
 /*--------------------------FIN DEL KEYPAD--------------------------*/
@@ -991,7 +991,7 @@ bool alarmSet = false;
 bool startAlarm = true;
 
 // Estados de la alarma.
-enum State { NONE, ALARM_SET, CHOSEN_ONE, CHOSEN_TWO, CHOSEN_THREE, 
+enum State { NONE, ALARM_SET, CHOSEN_ONE, CHOSEN_TWO, CHOSEN_THREE,
 CHOSEN_FOUR };
 
 State estado;
@@ -1002,17 +1002,19 @@ void setup() {
   // Set up the LCD's number of columns and rows:
   lcd.begin(screenWidth, screenHeight);
   
-  Serial.begin (112500);  
+  Serial.begin (112500);
   // Initialize UART pins.
   pinMode (rx, OUTPUT);
   pinMode (tx, INPUT);
   
   lcd.clear();
-  lcd.setCursor(0,0); // Situamos el cursor el la posición 2 de la linea 0.
+  // Situamos el cursor el la posición 2 de la linea 0.
+  lcd.setCursor(0,0);
   estado = NONE;
 }
 
-char codigoSecreto[4] = {'2','2','5','5'}; // Aqui va el codigo secreto.
+// Aqui va el codigo secreto.
+char codigoSecreto[4] = {'2','2','5','5'}; 
 int cursor = 5;
 int clave=0; // Para el LCD.
 int posicion=0; // Necesaria para la clave.
@@ -1053,7 +1055,7 @@ void changePass() {
   EEPROM.write(3, (int)codigoSecreto[3]);
 }
 
-void compruebaNumYActua(int num) {  
+void compruebaNumYActua(int num) {
   if (keypressed == '1') {
     lcd.clear();
     lcd.setCursor(0,0);
@@ -1073,7 +1075,7 @@ void compruebaNumYActua(int num) {
   } else if (keypressed == '2') {
     lcd.clear();
     lcd.setCursor(0,0);
-    lcd.print("Half alarm set!"); 
+    lcd.print("Half alarm set!");
     estado = CHOSEN_TWO;
     
     alarmSet = true;
@@ -1116,46 +1118,54 @@ void clearBuffer() {
  } 
 }
 
-void setupTeclado() 
+void setupTeclado()
 {
   cursor = 5;
   clave = 0;
   posicion = 0;
-  lcd.begin(16,2);      
-  lcd.setCursor(0,0); // Situamos el cursor el la posición 2 de la linea 0.
-  lcd.print("Introduzca Clave"); // Escribimos en LCD.
-  lcd.setCursor(cursor,1); // Cursor en la posición de la variable, linea 1.
+  lcd.begin(16,2);
+  // Situamos el cursor el la posición 2 de la linea 0.
+  lcd.setCursor(0,0); 
+  // Escribimos en LCD.
+  lcd.print("Introduzca Clave");
+  // Cursor en la posición de la variable, linea 1.
+  lcd.setCursor(cursor,1);
 }
 
-void loopTeclado() 
-{  
-  char pulsacion = myKeypad.getKey() ; // Leemos pulsación.
+void loopTeclado()
+{
+  // Leemos pulsación.
+  char pulsacion = myKeypad.getKey(); 
   int numPulsaciones = 0;
   // Si el valor es 0 es que no se ha pulsado ninguna tecla.
   if (pulsacion != 0)
-  { 
+  {
     // Descartamos almohadilla y asterisco.
     if (pulsacion != '#' && pulsacion != '*' && clave==0)
-    { 
-      lcd.print(pulsacion); // Imprimimos pulsación.
+    {
+      // Imprimimos pulsación.
+      lcd.print(pulsacion);
       numPulsaciones++;
-      cursor++;  
+      cursor++;
       delay(200);
       
       // Condicionales para comprobar la clave introducida.
       // Comparamos entrada con cada uno de los dígitos, uno a uno.
       if (pulsacion == codigoSecreto[posicion]){
-        posicion ++; // Aumentamos posicion si es correcto el digito.
+        // Aumentamos posicion si es correcto el digito.
+        posicion ++; 
       }
       
       if (posicion == 4)
       { 
         // Se han introducido los 4 correctamente.
-        byte dataX = 0; // Lo que le mandamos al otro arduino.
+        // Lo que le mandamos al otro arduino.
+        byte dataX = 0; 
         Serial.print(dataX);
         delay(300);
         
-        lcd.setCursor(0,0); // Situamos el cursor el la pos 0 de la linea 0.
+        // Situamos el cursor el la pos 0 de la linea 0.
+        lcd.setCursor(0,0);
         lcd.print("Clave correcta  "); // Escribimos en LCD.
         delay(300);
         
@@ -1181,7 +1191,8 @@ void loopTeclado()
       }
 
      // En el caso de que esté incompleta o no hayamos acertado. 
-     if(cursor>8) // Comprobamos que no pase de la cuarta posición.
+     // Comprobamos que no pase de la cuarta posición.
+     if(cursor>8)
      {  
        cursor=5; // Lo volvemos a colocar al inicio.
        posicion=0; // Borramos clave introducida.
@@ -1195,13 +1206,12 @@ void loopTeclado()
          byte dataR = 3; // Lo que le mandamos al otro arduino.
          Serial.print(dataR);
          delay(100);
-         
        }
      }
     }
   } 
 
- // Condicionales para resetear clave introducida. 
+ // Condicionales para resetear clave introducida.
  if (pulsacion == '*')
  { 
    // Asterisco para resetear el contador.
@@ -1209,7 +1219,8 @@ void loopTeclado()
    cursor = 5;
    clave=0;
    posicion=0;
-   lcd.setCursor(0,0); // Situamos el cursor el la posición 2 de la linea 0.
+   // Situamos el cursor el la posición 2 de la linea 0.
+   lcd.setCursor(0,0); 
    lcd.print("Introduzca clave"); // Escribimos en LCD.
    lcd.setCursor(5,1);
    lcd.print("    "); // Borramos de la pantalla los números.
@@ -1247,7 +1258,8 @@ void loop() {
     // 1. Activar Alarma. 
     // 2. Activar Media Alarma.
     // 3. Cambiar Contraseña.
-    // 4. Configuración Manual (Activar/Desactivar Aparatos de uno en uno).
+    /* 4. Configuración Manual (Activar/Desactivar 
+          Aparatos de uno en uno). */
 
     lcd.clear();
     lcd.setCursor(0, 0);
