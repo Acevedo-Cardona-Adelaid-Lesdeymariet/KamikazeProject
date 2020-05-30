@@ -1296,7 +1296,8 @@ void loop() {
       if (keypressed != 0)
       { 
         // Descartamos almohadilla y asterisco.
-        if (keypressed != '#' && keypressed != '*' && keypressed <= '4') {   
+        if (keypressed != '#' && keypressed != '*' && keypressed <= '4')
+        {
           lcd.print(keypressed); 
           break;
         } 
