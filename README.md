@@ -945,7 +945,7 @@ En este apartado se muestra el código resultante que hace funcionar nuestro pro
 int rx = 0;
 int tx = 1;
 
-/*-------------------------------KEYPAD---------------------------------------*/
+/*--------------------------KEYPAD--------------------------*/
 
 const byte numRows= 4; // Number of rows on the keypad.
 const byte numCols= 4; // Number of columns on the keypad.
@@ -965,7 +965,7 @@ byte colPins[numCols] = {A0,A1,A2,A3}; // Columns 0 to 3.
 Keypad myKeypad= Keypad(makeKeymap(keymap), rowPins, colPins, numRows, 
 numCols);
 
-/*------------------------ FIN DEL KEYPAD---------------------------------------*/
+/*--------------------------FIN DEL KEYPAD--------------------------*/
 
 // Initialize the library with the numbers of the interface pins.
 LiquidCrystal lcd(12, 11, 10, 9, 8, 13);
