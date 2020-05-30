@@ -58,7 +58,7 @@ Es por ello que la vía mas económica y rápida para poder obtener un sistema d
 
 ### ¿Por qué Estudiar y Utilizar Arduino? ###
 
-Arduino es una plataforma de software libre fácil de usar, que permite a los alumnos construir y programar sus propios proyectos. El “37-In-1 Sensor Kit for Arduino” ofrece una amplia variedad de componentes y sensores que permiten conectar el mundo físico con el virtual, desarrollando la concentración y las habilidades manuales. Con Arduino no solo se aprende a programar, sino que también se motiva al alumno a pensar creativamente, analizando situaciones y aplicando el pensamiento crítico y habilidades para resolver problemas reales.
+Arduino es una plataforma de software libre fácil de usar, que permite a los alumnos construir y programar sus propios proyectos. El *“37-In-1 Sensor Kit for Arduino”* ofrece una amplia variedad de componentes y sensores que permiten conectar el mundo físico con el virtual, desarrollando la concentración y las habilidades manuales. Con Arduino no solo se aprende a programar, sino que también se motiva al alumno a pensar creativamente, analizando situaciones y aplicando el pensamiento crítico y habilidades para resolver problemas reales.
 
 La robótica educativa, dentro de los colegios, nos proporciona una forma creativa de utilizar y comprender las nuevas tecnologías, la posibilidad de implementar soluciones basadas en ingenio y destreza, dejando de ser solamente consumidores.
 
