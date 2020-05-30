@@ -934,8 +934,8 @@ En este apartado se muestra el código resultante que hace funcionar nuestro pro
 ##### Arduino 1 #####
 
 ```cpp
-// mirar https://www.arduino.cc/en/Tutorial/EEPROMWrite
-// include the library code:
+// Mirar https://www.arduino.cc/en/Tutorial/EEPROMWrite
+// Include the library code:
 #include <LiquidCrystal.h>
 #include <Keypad.h>
 
@@ -946,8 +946,9 @@ int rx = 0;
 int tx = 1;
 
 /*-------------------------------KEYPAD---------------------------------------*/
-const byte numRows= 4; //number of rows on the keypad
-const byte numCols= 4; //number of columns on the keypad
+
+const byte numRows= 4; // Number of rows on the keypad.
+const byte numCols= 4; // Number of columns on the keypad.
 char keypressed;
 char keymap[numRows][numCols]=
 {
@@ -957,25 +958,26 @@ char keymap[numRows][numCols]=
 {'*', '0', '#', 'D'},
 };
 
-//Code that shows the the keypad connections to the arduino terminals
-byte rowPins[numRows] = {7,6,5,4};//Rows 0 to 3
-byte colPins[numCols] = {A0,A1,A2,A3};//Columns 0 to 3             
-//initializes an instance of the Keypad class
-Keypad myKeypad= Keypad(makeKeymap(keymap), rowPins, colPins, numRows, numCols);
+// Code that shows the the keypad connections to the arduino terminals.
+byte rowPins[numRows] = {7,6,5,4}; // Rows 0 to 3.
+byte colPins[numCols] = {A0,A1,A2,A3}; // Columns 0 to 3.             
+// Initializes an instance of the Keypad class.
+Keypad myKeypad= Keypad(makeKeymap(keymap), rowPins, colPins, numRows, 
+numCols);
 
 /*------------------------ FIN DEL KEYPAD---------------------------------------*/
 
-// initialize the library with the numbers of the interface pins
+// Initialize the library with the numbers of the interface pins.
 LiquidCrystal lcd(12, 11, 10, 9, 8, 13);
 
 // LCD Screen Resolution.
 int screenWidth = 16;
 int screenHeight = 2;
 
-// the two lines
+// The two lines.
 String lineOne, lineTwo;
 
-// reference flags
+// Reference flags.
 int stringStart, stringStop, displayMode, i = 0;
 int scrollCursor = screenWidth;
 
@@ -988,30 +990,32 @@ String linea2Act = "Enter passwd";
 bool alarmSet = false;
 bool startAlarm = true;
 
-// estados de la alarma
-enum State { NONE, ALARM_SET, CHOSEN_ONE, CHOSEN_TWO, CHOSEN_THREE, CHOSEN_FOUR };
+// Estados de la alarma.
+enum State { NONE, ALARM_SET, CHOSEN_ONE, CHOSEN_TWO, CHOSEN_THREE, 
+CHOSEN_FOUR };
+
 State estado;
 
 void changePass();
 
 void setup() {
-  // set up the LCD's number of columns and rows:
+  // Set up the LCD's number of columns and rows:
   lcd.begin(screenWidth, screenHeight);
   
   Serial.begin (112500);  
-  //initialize UART pins
+  // Initialize UART pins.
   pinMode (rx, OUTPUT);
   pinMode (tx, INPUT);
   
   lcd.clear();
-  lcd.setCursor(0,0);     // situamos el cursor el la posición 2 de la linea 0.
+  lcd.setCursor(0,0); // Situamos el cursor el la posición 2 de la linea 0.
   estado = NONE;
 }
 
-char codigoSecreto[4] = {'2','2','5','5'}; // Aqui va el codigo secreto
+char codigoSecreto[4] = {'2','2','5','5'}; // Aqui va el codigo secreto.
 int cursor = 5;
-int clave=0; // para el LCD
-int posicion=0; // necesaria para la clave
+int clave=0; // Para el LCD.
+int posicion=0; // Necesaria para la clave.
 
 void changePass() {
   bool wrong = false;
@@ -1026,9 +1030,11 @@ void changePass() {
   
   while(cont < 4) {
     keypressed = myKeypad.getKey(); 
-
-    if (keypressed != 0) //Si el valor es 0 es que no se ha pulsado ninguna tecla
-    { // descartamos almohadilla y asterisco
+ 
+    // Si el valor es 0 es que no se ha pulsado ninguna tecla.
+    if (keypressed != 0) 
+    { 
+      // Descartamos almohadilla y asterisco.
       codigoSecreto[cont] = keypressed;
       lcd.print(keypressed);
       cont++;
@@ -1040,7 +1046,7 @@ void changePass() {
   lcd.print("Passwd updated.");
   delay(2000);
   
-  // lo guardamos en la eeprom para que la siguiente vez empiece con ese
+  // Lo guardamos en la eeprom para que la siguiente vez empiece con ese.
   EEPROM.write(0, (int)codigoSecreto[0]);
   EEPROM.write(1, (int)codigoSecreto[1]);
   EEPROM.write(2, (int)codigoSecreto[2]);
@@ -1057,7 +1063,7 @@ void compruebaNumYActua(int num) {
     alarmSet = true;
     startAlarm = true;
     
-    byte dataR = 1; // lo que le mandamos al otro arduino
+    byte dataR = 1; // Lo que le mandamos al otro arduino.
     Serial.print(dataR);
     delay(300);
     dataR = 2;
@@ -1094,7 +1100,7 @@ void compruebaNumYActua(int num) {
 }
 
 void clearBuffer() {
- //clear out the serial buffer
+ // Clear out the serial buffer.
 
  byte w = 0;
 
@@ -1116,49 +1122,51 @@ void setupTeclado()
   clave = 0;
   posicion = 0;
   lcd.begin(16,2);      
-  lcd.setCursor(0,0);     // situamos el cursor el la posición 2 de la linea 0.
-  lcd.print("Introduzca clave"); // escribimos en LCD
-  lcd.setCursor(cursor,1); // cursor en la posición de la variable, linea 1
+  lcd.setCursor(0,0); // Situamos el cursor el la posición 2 de la linea 0.
+  lcd.print("Introduzca Clave"); // Escribimos en LCD.
+  lcd.setCursor(cursor,1); // Cursor en la posición de la variable, linea 1.
 }
 
 void loopTeclado() 
 {  
-  char pulsacion = myKeypad.getKey() ; // leemos pulsación
+  char pulsacion = myKeypad.getKey() ; // Leemos pulsación.
   int numPulsaciones = 0;
-  if (pulsacion != 0) //Si el valor es 0 es que no se ha pulsado ninguna tecla
-  { // descartamos almohadilla y asterisco
+  // Si el valor es 0 es que no se ha pulsado ninguna tecla.
+  if (pulsacion != 0)
+  { 
+    // Descartamos almohadilla y asterisco.
     if (pulsacion != '#' && pulsacion != '*' && clave==0)
     { 
-      lcd.print(pulsacion); // imprimimos pulsación
+      lcd.print(pulsacion); // Imprimimos pulsación.
       numPulsaciones++;
       cursor++;  
       delay(200);
       
-      //--- Condicionales para comprobar la clave introducida -----------
-      // comparamos entrada con cada uno de los dígitos, uno a uno
+      // Condicionales para comprobar la clave introducida.
+      // Comparamos entrada con cada uno de los dígitos, uno a uno.
       if (pulsacion == codigoSecreto[posicion]){
-        posicion ++; // aumentamos posicion si es correcto el digito
+        posicion ++; // Aumentamos posicion si es correcto el digito.
       }
       
       if (posicion == 4)
       { 
-        // se han introducido los 4 correctamente
-        byte dataX = 0; // lo que le mandamos al otro arduino
+        // Se han introducido los 4 correctamente.
+        byte dataX = 0; // Lo que le mandamos al otro arduino.
         Serial.print(dataX);
         delay(300);
         
-        lcd.setCursor(0,0);      // situamos el cursor el la pos 0 de la linea 0.
-        lcd.print("Clave correcta  ");         // escribimos en LCD
+        lcd.setCursor(0,0); // Situamos el cursor el la pos 0 de la linea 0.
+        lcd.print("Clave correcta  "); // Escribimos en LCD.
         delay(300);
         
-        dataX = 6; // lo que le mandamos al otro arduino
+        dataX = 6; // Lo que le mandamos al otro arduino.
         Serial.print(dataX);
         delay(300);
         
         //startAlarm = true;
         alarmSet = false; // Disarmed!!!!! lo quitamos!
        
-        clave=1; // indicamos que se ha introducido la clave
+        clave=1; // Indicamos que se ha introducido la clave.
            
         dataX = 0;
         Serial.print(dataX);
@@ -1167,24 +1175,24 @@ void loopTeclado()
 
       if (numPulsaciones >=4 && posicion != 4) {
          delay(200);
-        byte dataR = 3; // lo que le mandamos al otro arduino
+        byte dataR = 3; // Lo que le mandamos al otro arduino.
          Serial.print(dataR);
          delay(200);
       }
 
-     //--- En el caso de que esté incompleta o no hayamos acertado ----------
-     if(cursor>8)        // comprobamos que no pase de la cuarta posición
+     // En el caso de que esté incompleta o no hayamos acertado. 
+     if(cursor>8) // Comprobamos que no pase de la cuarta posición.
      {  
-       cursor=5;     // lo volvemos a colocar al inicio
-       posicion=0;           // borramos clave introducida
+       cursor=5; // Lo volvemos a colocar al inicio.
+       posicion=0; // Borramos clave introducida.
        lcd.setCursor(5,1);
-       lcd.print("    ");       // borramos la clave de la pantalla
+       lcd.print("    "); // Borramos la clave de la pantalla.
        lcd.setCursor(5,1);
-       if(clave==0)         // comprobamos que no hemos acertado
+       if(clave==0) // Comprobamos que no hemos acertado.
        { 
          delay(100);
-         // notificamos al otro arduino del error
-         byte dataR = 3; // lo que le mandamos al otro arduino
+         // Notificamos al otro arduino del error.
+         byte dataR = 3; // Lo que le mandamos al otro arduino.
          Serial.print(dataR);
          delay(100);
          
@@ -1193,17 +1201,18 @@ void loopTeclado()
     }
   } 
 
- //--- Condicionales para resetear clave introducida -------------
+ // Condicionales para resetear clave introducida. 
  if (pulsacion == '*')
- { // asterisco para resetear el contador
+ { 
+   // Asterisco para resetear el contador.
    posicion = 0;
    cursor = 5;
    clave=0;
    posicion=0;
-   lcd.setCursor(0,0); // situamos el cursor el la posición 2 de la linea 0.
-   lcd.print("Introduzca clave"); // escribimos en LCD
+   lcd.setCursor(0,0); // Situamos el cursor el la posición 2 de la linea 0.
+   lcd.print("Introduzca clave"); // Escribimos en LCD.
    lcd.setCursor(5,1);
-   lcd.print("    "); // borramos de la pantalla los números
+   lcd.print("    "); // Borramos de la pantalla los números.
    lcd.setCursor(5,1);
  }
 }
@@ -1212,21 +1221,21 @@ void loop() {
   
   int val1, val2, val3, val4;
   
-  // leemos la clave que esta guardada
+  // Leemos la clave que esta guardada.
   val1 = EEPROM.read(0);
   val2 = EEPROM.read(1);
   val3 = EEPROM.read(2);
   val4 = EEPROM.read(3);
   
   if (val1 == 0 && val2 == 0 && val3 == 0 && val4 == 0) {
-    // guardamos en la eeprom el codigo secreto inicial
+    // Guardamos en la eeprom el codigo secreto inicial.
     EEPROM.write(0, (int)codigoSecreto[0]);
     EEPROM.write(1, (int)codigoSecreto[1]);
     EEPROM.write(2, (int)codigoSecreto[2]);
     EEPROM.write(3, (int)codigoSecreto[3]);
   }
   
-  // leemos la clave que esta guardada
+  // Leemos la clave que esta guardada.
   val1 = EEPROM.read(0);
   val2 = EEPROM.read(1);
   val3 = EEPROM.read(2);
@@ -1234,10 +1243,11 @@ void loop() {
   
   if (!alarmSet) {
     setup();
-    // 1. Activar alarma 
-    // 2. Activar alarma (media alarma)
-    // 3. Cambiar passwd
-    // 4. Configuración manual (activar/desactivar aparatos de uno en uno)
+    
+    // 1. Activar Alarma. 
+    // 2. Activar Media Alarma.
+    // 3. Cambiar Contraseña.
+    // 4. Configuración Manual (Activar/Desactivar Aparatos de uno en uno).
 
     lcd.clear();
     lcd.setCursor(0, 0);
@@ -1268,8 +1278,10 @@ void loop() {
     while(true) {
       keypressed = myKeypad.getKey();   
 
-      if (keypressed != 0) //Si el valor es 0 es que no se ha pulsado ninguna tecla
-      { // descartamos almohadilla y asterisco
+      // Si el valor es 0 es que no se ha pulsado ninguna tecla.
+      if (keypressed != 0)
+      { 
+        // Descartamos almohadilla y asterisco.
         if (keypressed != '#' && keypressed != '*' && keypressed <= '4') {   
           lcd.print(keypressed); 
           break;
@@ -1290,14 +1302,14 @@ void loop() {
 
     delay(200);
 
-    // Si el numero es correcto, vemos que tenemos que hacer con el
+    // Si el numero es correcto, vemos que tenemos que hacer con el.
     if (!wrong) {
       compruebaNumYActua(keypressed);
     } 
     delay(200); 
   }
   else {
-    // parte de la alarma */
+    // Parte de la Alarma */
     if (startAlarm == true) {
       setupTeclado();
       startAlarm = false;
