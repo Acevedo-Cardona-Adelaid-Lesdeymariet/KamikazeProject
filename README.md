@@ -1332,20 +1332,20 @@ int tx = 1;
 
 int buzzer = 5;
 
-// detectores
+// Detectores.
 int ultrasonido = 8; 
 int pirPin = 7;
 int pirPin2 = 13;
 
-// leds
+// LEDs.
 int ledNaranja = 3;
 int ledVerde = 12; 
 int ledPinRojoH1 = 9;  
 int ledPinRojoH2 = 10;
 int ledPinRojoH3 = 11;
 
-byte val; // value read on from the serial port
-byte dataR; //it contains the byte read from EEPROM
+byte val; // Value read on from the serial port.
+byte dataR; // It contains the byte read from EEPROM.
 
 enum State { NONE, FULL_ALARM, HALF_ALARM, ALARM_SPLIT };
 State estado;
@@ -1356,7 +1356,6 @@ void loopMediaAlarma();
 
 void setup()
 { 
-  // 112500
   Serial.begin (112500);
   delay(500);
   pinMode(ledNaranja, OUTPUT);
@@ -1371,7 +1370,7 @@ void setup()
   pinMode(pirPin2, INPUT_PULLUP);
   pinMode(ultrasonido, INPUT);
   
-  //initialize UART pins
+  // Initialize UART pins.
   pinMode (rx, OUTPUT);
   pinMode (tx, INPUT);
   
@@ -1397,7 +1396,7 @@ void buzzer1() {
  tone(buzzer,350); 
 }
 void buzzerClaveCorrecta() {
-  delay(200); // tono de clave correcta
+  delay(200); // Tono de clave correcta.
   tone(buzzer,500);
   delay(100);
   noTone(buzzer);
@@ -1410,7 +1409,7 @@ void buzzerClaveCorrecta() {
 }
 
 void buzzerClaveIncorrecta() {
-  delay(200); // tono de clave incorrecta
+  delay(200); // Tono de clave incorrecta.
   tone(buzzer,300);
   delay(100);
   noTone(buzzer);
@@ -1420,9 +1419,9 @@ void buzzerClaveIncorrecta() {
 }
 
 void buzzerAlarma() {
-  tone(buzzer, 800); // play 400 Hz tone for 400 ms
+  tone(buzzer, 800);
   delay(200);
-  tone(buzzer, 500); // play 800Hz tone for 400ms
+  tone(buzzer, 500);
   delay(200);
   noTone(buzzer);
 }
@@ -1431,8 +1430,9 @@ bool intrusos = false;
 bool alarmOn = false;
 bool halfAlarmOn = false;
 
-// los tres siguientes solo se activan cuando 
-// queremos encender cada habitación por separado
+/* Los tres siguientes solo se activan cuando 
+   queremos encender cada habitación por separado. */
+   
 bool hab1On = false;
 bool hab2On = false;
 bool hab3On = false;
@@ -1453,21 +1453,22 @@ void loop()
 {
   if(Serial.available() > 0)
   {
-     val = Serial.read();  //read the next byte
+     val = Serial.read();  // Read the next byte.
 
     /*
-    0 - enciende led verde
-    1 - apaga led verde
-    2 - enciende led naranja
-    3 - apaga led naranja
-    4 - apaga buzzer
-    5 - enciende media alarma
-    6 - desactiva detección
-    7 - activa habitación 1
-    8 - activa habitación 2
-    9 - activa habitación 3
-    10 - change pass (cambio de contraseña)
+    0 - Enciende led verde.
+    1 - Apaga led verde.
+    2 - Enciende led naranja.
+    3 - Apaga led naranja.
+    4 - Apaga buzzer.
+    5 - Enciende media alarma.
+    6 - Desactiva detección.
+    7 - Activa habitación 1.
+    8 - Activa habitación 2.
+    9 - Activa habitación 3.
+    10 - Change Pass (Cambio de Contraseña).
     */
+    
     if (val == '0') {
       desactivaDeteccion();
     } else if (val == '1') {
@@ -1483,16 +1484,16 @@ void loop()
       enciendeMediaAlarma(); 
     } else if (val == '6') {
       desactivaDeteccion(); 
-      // tono de clave correcta?
+      // Tono de clave correcta?
       buzzerClaveCorrecta();
     } else if (val == '7') {
-      // activa hab 1
+      // Activa hab 1.
       hab1On = true;
     } else if (val == '8') {
-      // activa hab 2
+      // Activa hab 2.
       hab2On = true;
     } else if (val == '9') {
-      // activa hab 3
+      // Activa hab 3.
       hab3On = true;
     }
    
@@ -1511,24 +1512,29 @@ void loop()
 
 long readUltrasonicDistance(int pin)
 {
-  pinMode(pin, OUTPUT); // Clear the trigger
+  pinMode(pin, OUTPUT); // Clear the trigger.
   digitalWrite(pin, LOW);
   delayMicroseconds(2);
-  // Sets the pin on HIGH state for 10 micro seconds
+  // Sets the pin on HIGH state for 10 micro seconds.
   digitalWrite(pin, HIGH);
   delayMicroseconds(10);
   digitalWrite(pin, LOW);
   pinMode(pin, INPUT);
-  // Reads the pin, and returns the sound wave travel time in microseconds
+  /* Reads the pin, and returns the sound wave travel time 
+     in microseconds */
   return pulseIn(pin, HIGH);
 }
 
 void loopAlarmaCompleta() 
 {
-  bool desactivando = false; // utilizamos el valor desactivando como valor intermedio
-  // hasta que no nos informen los dos sensores de que realmente no están detectando
-  // a nadie no podemos encender el led verde como que todo está en orden. Tenemos
-  // que esperar a que ambos comprueben que no hay nadie para encender el verde
+  /* Utilizamos el valor desactivando como valor intermedio
+     hasta que no nos informen los dos sensores de que 
+     realmente no están detectando a nadie no podemos encender
+     el led verde como que todo está en orden. Tenemos que 
+     esperar a que ambos comprueben que no hay nadie para 
+     encender el verde */
+  
+  bool desactivando = false;
   
   int proximity = digitalRead(pirPin);
   delay(100);
@@ -1537,16 +1543,9 @@ void loopAlarmaCompleta()
   delay(100);
   
   int cm = 0.01723 * readUltrasonicDistance(ultrasonido);  
-/*Serial.begin (9600);
-delay(300);
-Serial.print("cm: ");
-    Serial.println(cm);
-    delay(300);
-Serial.begin (112500);
-  */  
-
-
-  if (proximity == HIGH) // If the sensor's output goes low, motion is detected
+  
+  // If the sensor's output goes low, motion is detected.
+  if (proximity == HIGH) 
   {
     digitalWrite(ledPinRojoH1, HIGH);
     intrusos = true;
@@ -1557,7 +1556,8 @@ Serial.begin (112500);
     desactivando = true;
   }
   
-  if (proximity2 == HIGH) // If the sensor's output goes low, motion is detected
+  // If the sensor's output goes low, motion is detected.
+  if (proximity2 == HIGH)
   {
     digitalWrite(ledPinRojoH3, HIGH);
     intrusos = true;
@@ -1592,34 +1592,32 @@ void enciendeMediaAlarma() {
   halfAlarmOn = true;
 }
 
-// loop media alarma
-// equivale al plan nocturno, donde van a estar activados dos de los tres sensores
-// no queremos que el de la habitación nos detecte
+/* Loop media alarma:
+   Equivale al plan nocturno, donde van a estar activados 
+   dos de los tres sensores no queremos que el de la 
+   habitación nos detecte */
+   
 void loopMediaAlarma() 
 {
-  bool desactivando = false; // utilizamos el valor desactivando como valor intermedio
-  // hasta que no nos informen los dos sensores de que realmente no están detectando
-  // a nadie no podemos encender el led verde como que todo está en orden. Tenemos
-  // que esperar a que ambos comprueben que no hay nadie para encender el verde
+  /* Utilizamos el valor desactivando como valor intermedio
+  hasta que no nos informen los dos sensores de que realmente
+  no están detectando a nadie no podemos encender el led verde
+  como que todo está en orden. Tenemos que esperar a que ambos
+  comprueben que no hay nadie para encender el verde */
   
-  // leemos el pir pin 1
+  bool desactivando = false; 
+  
+  // Leemos el pir pin 1.
   int proximity = digitalRead(pirPin);
   delay(100);
   
-  // leemos el ultrasonido
+  // Leemos el ultrasonido.
   int cm = 0.01723 * readUltrasonicDistance(ultrasonido);
-
-/*Serial.begin (9600);
-delay(300);
-Serial.print("cm: ");
-    Serial.println(cm);
-    delay(300);
-Serial.begin (112500);
-*/
   
-  if (proximity == HIGH) // If the sensor's output goes low, motion is detected
+  // If the sensor's output goes low, motion is detected.
+  if (proximity == HIGH)
   {
-    //tone(buzzer, 350, 200); 
+    // tone(buzzer, 350, 200); 
     digitalWrite(ledPinRojoH1, HIGH);
     intrusos = true;
   }
@@ -1629,9 +1627,10 @@ Serial.begin (112500);
     desactivando = true;
   }
 
-  // comprobamos la distancia al ultrasonidos
-  // si es menor de 200 cm, encendemos el led rojo de la 
-  // habitación 2
+  /* Comprobamos la distancia al ultrasonidos,
+     si es menor de 200 cm, encendemos el led rojo de la 
+     habitación 2 */
+     
   if (cm < 200) {
    // tone(buzzer, 350, 200); 
     digitalWrite(ledPinRojoH2, HIGH);
